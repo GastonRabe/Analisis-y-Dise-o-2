@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:standard="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_DqkFYLEvEeyQ9Kw_vnZjXQ" name="NewModel">
+    <packagedElement xmi:type="uml:Component" xmi:id="_mx8iALEzEeyQ9Kw_vnZjXQ" name="">
+      <packagedElement xmi:type="uml:Component" xmi:id="_pCclALEzEeyQ9Kw_vnZjXQ" name=""/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_NKLBILE0EeyQ9Kw_vnZjXQ" name="Emisor">
+      <interfaceRealization xmi:id="_sp33ULE2EeyQ9Kw_vnZjXQ" client="_NKLBILE0EeyQ9Kw_vnZjXQ" supplier="_IiVBYLE2EeyQ9Kw_vnZjXQ" contract="_IiVBYLE2EeyQ9Kw_vnZjXQ"/>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_PUEF0LE0EeyQ9Kw_vnZjXQ" name="Interfaz Usuario (GUI)">
+        <interfaceRealization xmi:id="_Ld1eULE4EeyQ9Kw_vnZjXQ" client="_PUEF0LE0EeyQ9Kw_vnZjXQ" supplier="_Ek4pgLE4EeyQ9Kw_vnZjXQ" contract="_Ek4pgLE4EeyQ9Kw_vnZjXQ"/>
+      </nestedClassifier>
+      <packagedElement xmi:type="uml:Component" xmi:id="__i6EwLE0EeyQ9Kw_vnZjXQ" name="ControladorEmisor">
+        <interfaceRealization xmi:id="_jadPgLE4EeyQ9Kw_vnZjXQ" client="__i6EwLE0EeyQ9Kw_vnZjXQ" supplier="_fZD2oLE4EeyQ9Kw_vnZjXQ" contract="_fZD2oLE4EeyQ9Kw_vnZjXQ"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_Ek4pgLE4EeyQ9Kw_vnZjXQ" name="VistaEmisor"/>
+      <packagedElement xmi:type="uml:Component" xmi:id="_RjfN8LE4EeyQ9Kw_vnZjXQ" name="RedEmisor"/>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_fZD2oLE4EeyQ9Kw_vnZjXQ" name="ControladorEmisor"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_b_TpYLE0EeyQ9Kw_vnZjXQ" name="Receptor">
+      <interfaceRealization xmi:id="_-DfuMLE5EeyQ9Kw_vnZjXQ" client="_b_TpYLE0EeyQ9Kw_vnZjXQ" supplier="_vM0N0LE5EeyQ9Kw_vnZjXQ" contract="_vM0N0LE5EeyQ9Kw_vnZjXQ"/>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_b_TpYbE0EeyQ9Kw_vnZjXQ" name="Interfaz Usuario (GUI)"/>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_4CkjALE4EeyQ9Kw_vnZjXQ" name="VistaReceptor"/>
+      <packagedElement xmi:type="uml:Component" xmi:id="_HX-jkLE1EeyQ9Kw_vnZjXQ" name="Interfaz Usuario (GUI)">
+        <interfaceRealization xmi:id="_7NZgQLE4EeyQ9Kw_vnZjXQ" client="_HX-jkLE1EeyQ9Kw_vnZjXQ" supplier="_4CkjALE4EeyQ9Kw_vnZjXQ" contract="_4CkjALE4EeyQ9Kw_vnZjXQ"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Component" xmi:id="_rvePILE3EeyQ9Kw_vnZjXQ" name="ControladorReceptor">
+        <interfaceRealization xmi:id="_CxPFILE5EeyQ9Kw_vnZjXQ" client="_rvePILE3EeyQ9Kw_vnZjXQ" supplier="_BAzpULE5EeyQ9Kw_vnZjXQ" contract="_BAzpULE5EeyQ9Kw_vnZjXQ"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Component" xmi:id="_zeJ8oLE4EeyQ9Kw_vnZjXQ" name="RedReceptor"/>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_BAzpULE5EeyQ9Kw_vnZjXQ" name="ControladorReceptor"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_IiVBYLE2EeyQ9Kw_vnZjXQ" name="Solicitud"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_o4hFkLE2EeyQ9Kw_vnZjXQ" supplier="_IiVBYLE2EeyQ9Kw_vnZjXQ"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_OFk8oLE4EeyQ9Kw_vnZjXQ" client="_NKLBILE0EeyQ9Kw_vnZjXQ" supplier="_Ek4pgLE4EeyQ9Kw_vnZjXQ"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_PSLSoLE4EeyQ9Kw_vnZjXQ" client="__i6EwLE0EeyQ9Kw_vnZjXQ" supplier="_Ek4pgLE4EeyQ9Kw_vnZjXQ"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_kSmYcLE4EeyQ9Kw_vnZjXQ" client="_RjfN8LE4EeyQ9Kw_vnZjXQ" supplier="_fZD2oLE4EeyQ9Kw_vnZjXQ"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_73XDQLE4EeyQ9Kw_vnZjXQ" client="_rvePILE3EeyQ9Kw_vnZjXQ" supplier="_4CkjALE4EeyQ9Kw_vnZjXQ"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_Ec0dMLE5EeyQ9Kw_vnZjXQ" client="_zeJ8oLE4EeyQ9Kw_vnZjXQ" supplier="_BAzpULE5EeyQ9Kw_vnZjXQ"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_dskDILE5EeyQ9Kw_vnZjXQ" name="Solicitud Procesada"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_nm6MYLE5EeyQ9Kw_vnZjXQ" client="_b_TpYLE0EeyQ9Kw_vnZjXQ" supplier="_dskDILE5EeyQ9Kw_vnZjXQ"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_vM0N0LE5EeyQ9Kw_vnZjXQ" name="Solicitud Recibida"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_8EwJkLE5EeyQ9Kw_vnZjXQ" supplier="_vM0N0LE5EeyQ9Kw_vnZjXQ"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_Fv4LELE6EeyQ9Kw_vnZjXQ" name="Solicitud Recibida"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_Nx7V8LE6EeyQ9Kw_vnZjXQ" client="_NKLBILE0EeyQ9Kw_vnZjXQ" supplier="_Fv4LELE6EeyQ9Kw_vnZjXQ"/>
+    <profileApplication xmi:id="_SLsaQLE0EeyQ9Kw_vnZjXQ">
+      <eAnnotations xmi:id="_SLtBULE0EeyQ9Kw_vnZjXQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <standard:Subsystem xmi:id="_SLuPcLE0EeyQ9Kw_vnZjXQ" base_Component="_NKLBILE0EeyQ9Kw_vnZjXQ"/>
+  <standard:Subsystem xmi:id="_b_UQcLE0EeyQ9Kw_vnZjXQ" base_Component="_b_TpYLE0EeyQ9Kw_vnZjXQ"/>
+</xmi:XMI>

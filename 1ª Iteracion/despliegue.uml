@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:standard="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_zcp14LE6EeyQ9Kw_vnZjXQ" name="NewModel">
+    <packagedElement xmi:type="uml:Device" xmi:id="_grPI0LE7EeyQ9Kw_vnZjXQ" name="PC Emisor">
+      <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_qwUicLE7EeyQ9Kw_vnZjXQ" name="Windows/Linux">
+        <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_kkzl8LE8EeyQ9Kw_vnZjXQ" name="JRE System Library 16">
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_FdViMLE9EeyQ9Kw_vnZjXQ" name="Emisor.jar">
+            <manifestation xmi:id="_RjxBILFAEeyQ9Kw_vnZjXQ" client="_FdViMLE9EeyQ9Kw_vnZjXQ">
+              <supplier xmi:type="uml:Component" href="componentes.uml#_NKLBILE0EeyQ9Kw_vnZjXQ"/>
+              <utilizedElement xmi:type="uml:Component" href="componentes.uml#_NKLBILE0EeyQ9Kw_vnZjXQ"/>
+            </manifestation>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_CkLHQLE-EeyQ9Kw_vnZjXQ" name="JavaLib.jar"/>
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_DN2rgLFAEeyQ9Kw_vnZjXQ" name="pom.xml"/>
+        </nestedNode>
+      </nestedNode>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Device" xmi:id="_VtKxYLE-EeyQ9Kw_vnZjXQ" name="PC Receptor">
+      <nestedClassifier xmi:type="uml:ExecutionEnvironment" xmi:id="_qczpMLE-EeyQ9Kw_vnZjXQ" name="">
+        <nestedClassifier xmi:type="uml:Artifact" xmi:id="_bOwxsLE-EeyQ9Kw_vnZjXQ" name="Receptor.jar"/>
+        <nestedClassifier xmi:type="uml:ExecutionEnvironment" xmi:id="_wX5HkLE-EeyQ9Kw_vnZjXQ" name="JRE System Library 16">
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_wX5HkbE-EeyQ9Kw_vnZjXQ" name="Emisor.jar"/>
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_wX5HkrE-EeyQ9Kw_vnZjXQ" name="JavaLib"/>
+        </nestedClassifier>
+        <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_qczpMbE-EeyQ9Kw_vnZjXQ" name="JRE System Library 16">
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_qczpMrE-EeyQ9Kw_vnZjXQ" name="Emisor.jar"/>
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_qczpM7E-EeyQ9Kw_vnZjXQ" name="JavaLib"/>
+        </nestedNode>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:ExecutionEnvironment" xmi:id="_zMHisLE-EeyQ9Kw_vnZjXQ" name="Windows/Linux">
+        <nestedClassifier xmi:type="uml:ExecutionEnvironment" xmi:id="_3q_hwLE-EeyQ9Kw_vnZjXQ" name="JRE System Library 16">
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_3q_hwbE-EeyQ9Kw_vnZjXQ" name="Emisor.jar"/>
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_3q_hwrE-EeyQ9Kw_vnZjXQ" name="JavaLib"/>
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_7HQNQLE-EeyQ9Kw_vnZjXQ" name="Receptor.jar">
+            <manifestation xmi:id="_tJT2QLE_EeyQ9Kw_vnZjXQ" client="_7HQNQLE-EeyQ9Kw_vnZjXQ">
+              <supplier xmi:type="uml:Component" href="componentes.uml#_b_TpYLE0EeyQ9Kw_vnZjXQ"/>
+              <utilizedElement xmi:type="uml:Component" href="componentes.uml#_b_TpYLE0EeyQ9Kw_vnZjXQ"/>
+            </manifestation>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_XPwTkLFAEeyQ9Kw_vnZjXQ" name="JavaLib.jar"/>
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_b9cxwLFAEeyQ9Kw_vnZjXQ" name="pom.xml"/>
+        </nestedClassifier>
+        <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_zMHisbE-EeyQ9Kw_vnZjXQ" name="JRE System Library 16">
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_zMHisrE-EeyQ9Kw_vnZjXQ" name="Emisor.jar"/>
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_zMHis7E-EeyQ9Kw_vnZjXQ" name="JavaLib"/>
+        </nestedNode>
+      </nestedClassifier>
+      <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_VtKxYbE-EeyQ9Kw_vnZjXQ" name="Windows">
+        <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_VtKxYrE-EeyQ9Kw_vnZjXQ" name="JRE System Library 16">
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_VtKxY7E-EeyQ9Kw_vnZjXQ" name="Emisor.jar"/>
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_VtKxZLE-EeyQ9Kw_vnZjXQ" name="JavaLib"/>
+        </nestedNode>
+      </nestedNode>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_hV354LE-EeyQ9Kw_vnZjXQ" name="http" memberEnd="_hV4g8LE-EeyQ9Kw_vnZjXQ _hV4g87E-EeyQ9Kw_vnZjXQ" navigableOwnedEnd="_hV4g8LE-EeyQ9Kw_vnZjXQ _hV4g87E-EeyQ9Kw_vnZjXQ">
+      <ownedEnd xmi:id="_hV4g8LE-EeyQ9Kw_vnZjXQ" name="receptor.jars" type="_bOwxsLE-EeyQ9Kw_vnZjXQ" association="_hV354LE-EeyQ9Kw_vnZjXQ">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hV4g8bE-EeyQ9Kw_vnZjXQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hV4g8rE-EeyQ9Kw_vnZjXQ" value="*"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_hV4g87E-EeyQ9Kw_vnZjXQ" name="emisor.jars" type="_FdViMLE9EeyQ9Kw_vnZjXQ" association="_hV354LE-EeyQ9Kw_vnZjXQ">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hV4g9LE-EeyQ9Kw_vnZjXQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hV4g9bE-EeyQ9Kw_vnZjXQ" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Device" xmi:id="_JlNroLE_EeyQ9Kw_vnZjXQ" name="PC Servidor">
+      <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_JlNrobE_EeyQ9Kw_vnZjXQ" name="Windows/Linux">
+        <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_JlNrorE_EeyQ9Kw_vnZjXQ" name="JRE System Library 16">
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_JlNro7E_EeyQ9Kw_vnZjXQ" name="Emisor.jar"/>
+          <nestedClassifier xmi:type="uml:Artifact" xmi:id="_JlNrpLE_EeyQ9Kw_vnZjXQ" name="JavaLib"/>
+        </nestedNode>
+      </nestedNode>
+      <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_uaJWkLFAEeyQ9Kw_vnZjXQ" name="Windows Server"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_TMuYcLE_EeyQ9Kw_vnZjXQ" name="http" memberEnd="_TMu_gLE_EeyQ9Kw_vnZjXQ _TMu_g7E_EeyQ9Kw_vnZjXQ" navigableOwnedEnd="_TMu_gLE_EeyQ9Kw_vnZjXQ _TMu_g7E_EeyQ9Kw_vnZjXQ">
+      <ownedEnd xmi:id="_TMu_gLE_EeyQ9Kw_vnZjXQ" name="pC Emisors" type="_grPI0LE7EeyQ9Kw_vnZjXQ" association="_TMuYcLE_EeyQ9Kw_vnZjXQ">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_TMu_gbE_EeyQ9Kw_vnZjXQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_TMu_grE_EeyQ9Kw_vnZjXQ" value="*"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_TMu_g7E_EeyQ9Kw_vnZjXQ" name="pC Servidors" type="_JlNroLE_EeyQ9Kw_vnZjXQ" association="_TMuYcLE_EeyQ9Kw_vnZjXQ">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_TMu_hLE_EeyQ9Kw_vnZjXQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_TMvmkLE_EeyQ9Kw_vnZjXQ" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_dahpMLE_EeyQ9Kw_vnZjXQ" name="http" memberEnd="_dahpMbE_EeyQ9Kw_vnZjXQ _daiQQbE_EeyQ9Kw_vnZjXQ" navigableOwnedEnd="_dahpMbE_EeyQ9Kw_vnZjXQ _daiQQbE_EeyQ9Kw_vnZjXQ">
+      <ownedEnd xmi:id="_dahpMbE_EeyQ9Kw_vnZjXQ" name="pC Servidors" type="_JlNroLE_EeyQ9Kw_vnZjXQ" association="_dahpMLE_EeyQ9Kw_vnZjXQ">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dahpMrE_EeyQ9Kw_vnZjXQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_daiQQLE_EeyQ9Kw_vnZjXQ" value="*"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_daiQQbE_EeyQ9Kw_vnZjXQ" name="pC Receptors" type="_VtKxYLE-EeyQ9Kw_vnZjXQ" association="_dahpMLE_EeyQ9Kw_vnZjXQ">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_daiQQrE_EeyQ9Kw_vnZjXQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_daiQQ7E_EeyQ9Kw_vnZjXQ" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_wYGtgLE_EeyQ9Kw_vnZjXQ" client="_FdViMLE9EeyQ9Kw_vnZjXQ" supplier="_CkLHQLE-EeyQ9Kw_vnZjXQ"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_IJna4LFAEeyQ9Kw_vnZjXQ" client="_FdViMLE9EeyQ9Kw_vnZjXQ" supplier="_DN2rgLFAEeyQ9Kw_vnZjXQ"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_fTAYULFAEeyQ9Kw_vnZjXQ" client="_7HQNQLE-EeyQ9Kw_vnZjXQ" supplier="_XPwTkLFAEeyQ9Kw_vnZjXQ"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_f9BlsLFAEeyQ9Kw_vnZjXQ" client="_7HQNQLE-EeyQ9Kw_vnZjXQ" supplier="_b9cxwLFAEeyQ9Kw_vnZjXQ"/>
+    <profileApplication xmi:id="_FxQuULE-EeyQ9Kw_vnZjXQ">
+      <eAnnotations xmi:id="_FxQuUbE-EeyQ9Kw_vnZjXQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <standard:Library xmi:id="_FxR8cLE-EeyQ9Kw_vnZjXQ" base_Artifact="_CkLHQLE-EeyQ9Kw_vnZjXQ"/>
+  <standard:Document xmi:id="_KIzEYLFAEeyQ9Kw_vnZjXQ" base_Artifact="_DN2rgLFAEeyQ9Kw_vnZjXQ"/>
+  <standard:Library xmi:id="_bJHKwLFAEeyQ9Kw_vnZjXQ" base_Artifact="_XPwTkLFAEeyQ9Kw_vnZjXQ"/>
+  <standard:Document xmi:id="_dhPfwLFAEeyQ9Kw_vnZjXQ" base_Artifact="_b9cxwLFAEeyQ9Kw_vnZjXQ"/>
+</xmi:XMI>
