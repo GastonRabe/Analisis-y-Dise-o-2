@@ -51,6 +51,7 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 	private JPanel panel_7;
 	private JLabel lblNewLabel_4;
 
+	private ConectaServidor servidor;
 	/**
 	 * Launch the application.
 	 */
@@ -71,6 +72,7 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public PanelPrincipal() {
+		setTitle("Emisor");
 		setForeground(SystemColor.infoText);
 		setBackground(Color.BLACK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -181,17 +183,20 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 		
 	}
 	public void actionPerformed(ActionEvent e) {
-		try {
-            Socket socket = new Socket("192.168.0.88",1233);
+		/*try {
+            Socket socket = new Socket("localhost",1233);
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out.println(textFieldPuesto.getText());
             out.close();
+            
             socket.close();
             //jTextArea1.setText("");
             
         } catch (Exception ee) {
             ee.printStackTrace();
-        }
+        }*/
+		this.servidor  = new ConectaServidor();
+		this.servidor.start();
 	}
 }
