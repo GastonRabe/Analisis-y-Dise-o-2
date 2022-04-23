@@ -31,7 +31,6 @@ public class Controlador implements ActionListener, Observer{
 			String ip = this.vista.getIp();
 			String puesto = this.vista.getPuesto();
 			ip=ip.trim();
-			System.out.println("a"+ip+"a");
 			if(puerto == null || puerto.equals("")) {
 				this.vista.showMensaje("Ingrese un puerto");
 			}else if(ip == null || ip.equals("") || ip.isEmpty()) {
