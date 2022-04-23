@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
@@ -21,6 +22,9 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
+
+import Modelo.ConectaServidor;
+
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -28,8 +32,10 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 
-public class PanelPrincipal extends JFrame implements ActionListener {
+public class PanelPrincipal extends JFrame implements IVista {
 
 	private JPanel contentPane;
 	private JPanel panelPrincipal;
@@ -38,24 +44,28 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 	private JPanel panel;
 	private JLabel lblNewLabel;
 	private JPanel panel_1;
-	private JButton btnNewButton;
 	private JPanel panel_2;
 	private JLabel lblNewLabel_1;
 	private JPanel panel_3;
-	private JButton btnNewButton_1;
+	private JButton btn_solicitarIncendio;
 	private JPanel panel_4;
 	private JLabel lblNewLabel_2;
 	private JPanel panel_5;
-	private JButton btnNewButton_2;
+	private JButton btn_solicitarSeguridad;
 	private JPanel panel_6;
 	private JPanel panel_7;
 	private JLabel lblNewLabel_4;
 
 	private ConectaServidor servidor;
+	private JTextField textFieldPuerto;
+	private JTextField textFieldIP;
+	private JLabel lblNewLabel_5;
+	private JLabel lblNewLabel_6;
+	private JButton btn_solicitarMedico;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -66,7 +76,7 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 				}
 			}
 		}); 
-	}
+	}*/
 
 	/**
 	 * Create the frame.
@@ -92,24 +102,45 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 		this.panelPrincipal.add(this.panel_6);
 		this.panel_6.setLayout(null);
 		
-		this.lblNewLabel_3 = new JLabel("Puesto de trabajo");
+		this.lblNewLabel_3 = new JLabel("Puesto de trabajo:");
 		this.lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.lblNewLabel_3.setBounds(10, 52, 195, 37);
+		this.lblNewLabel_3.setBounds(31, 74, 195, 37);
 		this.panel_6.add(this.lblNewLabel_3);
 		
-		this.lblNewLabel_4 = new JLabel("(Campo obligatorio)");
+		this.lblNewLabel_4 = new JLabel("(Campos obligatorios)");
 		this.lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.lblNewLabel_4.setBounds(10, 81, 195, 31);
+		this.lblNewLabel_4.setBounds(31, 108, 195, 31);
 		this.panel_6.add(this.lblNewLabel_4);
+		
+		this.lblNewLabel_5 = new JLabel("IP:");
+		this.lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		this.lblNewLabel_5.setBounds(31, 24, 46, 14);
+		this.panel_6.add(this.lblNewLabel_5);
+		
+		this.lblNewLabel_6 = new JLabel("Puerto:");
+		this.lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		this.lblNewLabel_6.setBounds(31, 48, 118, 25);
+		this.panel_6.add(this.lblNewLabel_6);
 		
 		this.panel_7 = new JPanel();
 		this.panelPrincipal.add(this.panel_7);
 		this.panel_7.setLayout(null);
 		
 		this.textFieldPuesto = new JTextField();
-		this.textFieldPuesto.setBounds(23, 63, 171, 20);
+		this.textFieldPuesto.setBounds(10, 82, 171, 20);
 		this.panel_7.add(this.textFieldPuesto);
 		this.textFieldPuesto.setColumns(10);
+		
+		this.textFieldPuerto = new JTextField();
+		this.textFieldPuerto.setBounds(10, 51, 171, 20);
+		this.panel_7.add(this.textFieldPuerto);
+		this.textFieldPuerto.setColumns(10);
+		
+		this.textFieldIP = new JTextField();
+		
+		this.textFieldIP.setBounds(10, 21, 171, 20);
+		this.panel_7.add(this.textFieldIP);
+		this.textFieldIP.setColumns(10);
 		
 		this.panel = new JPanel();
 		this.panel.setLayout(null);
@@ -120,7 +151,7 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 		this.lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		this.lblNewLabel.setAlignmentX(0.5f);
-		this.lblNewLabel.setBounds(22, 84, 150, 28);
+		this.lblNewLabel.setBounds(22, 58, 150, 28);
 		this.panel.add(this.lblNewLabel);
 		
 		this.panel_1 = new JPanel();
@@ -128,12 +159,13 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 		this.panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		this.panelPrincipal.add(this.panel_1);
 		
-		this.btnNewButton = new JButton("Solicitar");
-		this.btnNewButton.setForeground(Color.WHITE);
-		this.btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.btnNewButton.setBackground(Color.BLACK);
-		this.btnNewButton.setBounds(50, 65, 100, 50);
-		this.panel_1.add(this.btnNewButton);
+		btn_solicitarMedico = new JButton("Solicitar");
+		this.btn_solicitarMedico.setActionCommand("Medico");
+		btn_solicitarMedico.setForeground(Color.WHITE);
+		btn_solicitarMedico.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btn_solicitarMedico.setBackground(Color.BLACK);
+		btn_solicitarMedico.setBounds(51, 42, 100, 50);
+		this.panel_1.add(btn_solicitarMedico);
 		
 		this.panel_2 = new JPanel();
 		this.panel_2.setLayout(null);
@@ -142,7 +174,7 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 		
 		this.lblNewLabel_1 = new JLabel("Foco de Incendio");
 		this.lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.lblNewLabel_1.setBounds(31, 72, 147, 14);
+		this.lblNewLabel_1.setBounds(32, 59, 147, 14);
 		this.panel_2.add(this.lblNewLabel_1);
 		
 		this.panel_3 = new JPanel();
@@ -150,12 +182,13 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 		this.panel_3.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		this.panelPrincipal.add(this.panel_3);
 		
-		this.btnNewButton_1 = new JButton("Solicitar");
-		this.btnNewButton_1.setForeground(Color.WHITE);
-		this.btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.btnNewButton_1.setBackground(Color.BLACK);
-		this.btnNewButton_1.setBounds(50, 65, 100, 50);
-		this.panel_3.add(this.btnNewButton_1);
+		this.btn_solicitarIncendio = new JButton("Solicitar");
+		this.btn_solicitarIncendio.setActionCommand("Foco Incendio");
+		this.btn_solicitarIncendio.setForeground(Color.WHITE);
+		this.btn_solicitarIncendio.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		this.btn_solicitarIncendio.setBackground(Color.BLACK);
+		this.btn_solicitarIncendio.setBounds(50, 41, 100, 50);
+		this.panel_3.add(this.btn_solicitarIncendio);
 		
 		this.panel_4 = new JPanel();
 		this.panel_4.setLayout(null);
@@ -164,7 +197,7 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 		
 		this.lblNewLabel_2 = new JLabel("Personal de Seguridad");
 		this.lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.lblNewLabel_2.setBounds(10, 78, 192, 14);
+		this.lblNewLabel_2.setBounds(10, 61, 192, 14);
 		this.panel_4.add(this.lblNewLabel_2);
 		
 		this.panel_5 = new JPanel();
@@ -172,31 +205,52 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 		this.panel_5.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		this.panelPrincipal.add(this.panel_5);
 		
-		this.btnNewButton_2 = new JButton("Solicitar");
-		this.btnNewButton_2.addActionListener(this);
-		this.btnNewButton_2.setForeground(Color.WHITE);
-		this.btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.btnNewButton_2.setBackground(Color.BLACK);
-		this.btnNewButton_2.setBounds(50, 65, 100, 50);
-		this.panel_5.add(this.btnNewButton_2);
+		this.btn_solicitarSeguridad = new JButton("Solicitar");
+		this.btn_solicitarSeguridad.setActionCommand("Seguridad");
 		
+		this.btn_solicitarSeguridad.setForeground(Color.WHITE);
+		this.btn_solicitarSeguridad.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		this.btn_solicitarSeguridad.setBackground(Color.BLACK);
+		this.btn_solicitarSeguridad.setBounds(50, 46, 100, 50);
+		this.panel_5.add(this.btn_solicitarSeguridad);
+		
+		setVisible(true);
+	}
+
+	@Override
+	public String getPuerto() {
+		// TODO Auto-generated method stub
+		return this.textFieldPuerto.getText();
+	}
+
+	@Override
+	public String getIp() {
+		// TODO Auto-generated method stub
+		return this.textFieldIP.getText();
+	}
+
+	@Override
+	public String getPuesto() {
+		// TODO Auto-generated method stub
+		return this.textFieldPuesto.getText();
+	}
+
+	@Override
+	public void setActionListener(ActionListener a) {
+		this.btn_solicitarIncendio.addActionListener(a);
+		this.btn_solicitarMedico.addActionListener(a);
+		this.btn_solicitarSeguridad.addActionListener(a);
 		
 	}
-	public void actionPerformed(ActionEvent e) {
-		/*try {
-            Socket socket = new Socket("localhost",1233);
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out.println(textFieldPuesto.getText());
-            out.close();
-            
-            socket.close();
-            //jTextArea1.setText("");
-            
-        } catch (Exception ee) {
-            ee.printStackTrace();
-        }*/
-		this.servidor  = new ConectaServidor();
-		this.servidor.start();
+
+	@Override
+	public void showMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje);
+		
 	}
+	
+	public void visible(boolean visible) {
+		this.setVisible(visible);
+	}
+	
 }

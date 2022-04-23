@@ -10,31 +10,35 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 import java.awt.GridLayout;
 import java.awt.Color;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import javax.swing.border.MatteBorder;
+import javax.swing.JButton;
 
-public class PanelAvisoRecepcion extends JFrame {
+public class PanelAvisoRecepcion extends JFrame implements IVista {
 
 	private JPanel contentPane;
 	private JPanel panel;
 	private JPanel panel_1;
-	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JPanel panel_2;
 	private JLabel lblNewLabel_2;
-	private JTextField textField;
+	private JTextField textField_tipo;
 	private JLabel lblNewLabel_3;
-	private JTextField textField_1;
+	private JTextField textField_lugar;
 	private JLabel lblNewLabel_4;
-	private JTextField textField_2;
+	private JTextField textField_hora;
+	private JButton btnNewButton;
+	private JTextField txtNoRecibida;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -45,12 +49,12 @@ public class PanelAvisoRecepcion extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public PanelAvisoRecepcion() {
+	public PanelAvisoRecepcion(String tipo, String lugar) {
 		setBackground(SystemColor.inactiveCaptionText);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -80,47 +84,95 @@ public class PanelAvisoRecepcion extends JFrame {
 		this.lblNewLabel_2.setBounds(10, 11, 50, 14);
 		this.panel_2.add(this.lblNewLabel_2);
 		
-		this.textField = new JTextField();
-		this.textField.setEditable(false);
-		this.textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.textField.setBounds(54, 8, 86, 20);
-		this.panel_2.add(this.textField);
-		this.textField.setColumns(10);
+		this.textField_tipo = new JTextField();
+		this.textField_tipo.setEditable(false);
+		this.textField_tipo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		this.textField_tipo.setBounds(54, 8, 86, 20);
+		this.panel_2.add(this.textField_tipo);
+		this.textField_tipo.setColumns(10);
 		
 		this.lblNewLabel_3 = new JLabel("Lugar:");
 		this.lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		this.lblNewLabel_3.setBounds(276, 10, 50, 17);
 		this.panel_2.add(this.lblNewLabel_3);
 		
-		this.textField_1 = new JTextField();
-		this.textField_1.setEditable(false);
-		this.textField_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.textField_1.setBounds(326, 8, 86, 20);
-		this.panel_2.add(this.textField_1);
-		this.textField_1.setColumns(10);
+		this.textField_lugar = new JTextField();
+		this.textField_lugar.setEditable(false);
+		this.textField_lugar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		this.textField_lugar.setBounds(326, 8, 86, 20);
+		this.panel_2.add(this.textField_lugar);
+		this.textField_lugar.setColumns(10);
 		
 		this.lblNewLabel_4 = new JLabel("Hora:");
 		this.lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		this.lblNewLabel_4.setBounds(143, 39, 49, 14);
 		this.panel_2.add(this.lblNewLabel_4);
 		
-		this.textField_2 = new JTextField();
-		this.textField_2.setEditable(false);
-		this.textField_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.textField_2.setBounds(187, 36, 86, 20);
-		this.panel_2.add(this.textField_2);
-		this.textField_2.setColumns(10);
+		this.textField_hora = new JTextField();
+		this.textField_hora.setEditable(false);
+		this.textField_hora.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		this.textField_hora.setBounds(187, 36, 86, 20);
+		this.panel_2.add(this.textField_hora);
+		this.textField_hora.setColumns(10);
 		
 		this.panel_1 = new JPanel();
 		this.panel_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		this.contentPane.add(this.panel_1);
 		this.panel_1.setLayout(null);
 		
-		this.lblNewLabel = new JLabel("No Recibida");
-		this.lblNewLabel.setBackground(Color.GRAY);
-		this.lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 36));
-		this.lblNewLabel.setBounds(112, 22, 198, 78);
-		this.panel_1.add(this.lblNewLabel);
+		this.btnNewButton = new JButton("OK");
+		this.btnNewButton.setEnabled(false);
+		this.btnNewButton.setBounds(180, 110, 85, 21);
+		this.panel_1.add(this.btnNewButton);
+		
+		this.txtNoRecibida = new JTextField();
+		this.txtNoRecibida.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		this.txtNoRecibida.setText("No Recibida");
+		this.txtNoRecibida.setEditable(false);
+		this.txtNoRecibida.setBounds(151, 31, 143, 59);
+		this.panel_1.add(this.txtNoRecibida);
+		this.txtNoRecibida.setColumns(10);
+		
+		this.textField_lugar.setText(lugar);
+		this.textField_tipo.setText(tipo);
+		this.textField_hora.setText(LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+		
+		this.setVisible(true);
 	}
 
+	@Override
+	public String getPuerto() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getIp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPuesto() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setActionListener(ActionListener a) {
+		this.btnNewButton.addActionListener(a);
+	}
+
+	@Override
+	public void showMensaje(String mensaje) {
+		this.txtNoRecibida.setText(mensaje);
+		this.btnNewButton.setEnabled(true);
+	}
+
+	@Override
+	public void visible(boolean visible) {
+		this.setVisible(false);
+		this.dispose();
+		
+	}
 }
