@@ -35,7 +35,7 @@ import javax.swing.JTextField;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
-public class PanelPrincipal extends JFrame implements IVista {
+public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 
 	private JPanel contentPane;
 	private JPanel panelPrincipal;
@@ -132,6 +132,7 @@ public class PanelPrincipal extends JFrame implements IVista {
 		this.textFieldPuesto.setColumns(10);
 		
 		this.textFieldPuerto = new JTextField();
+		this.textFieldPuerto.addKeyListener(this);
 		this.textFieldPuerto.setBounds(10, 51, 171, 20);
 		this.panel_7.add(this.textFieldPuerto);
 		this.textFieldPuerto.setColumns(10);
@@ -147,7 +148,7 @@ public class PanelPrincipal extends JFrame implements IVista {
 		this.panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		this.panelPrincipal.add(this.panel);
 		
-		this.lblNewLabel = new JLabel("Asistencia M\u00E9dica");
+		this.lblNewLabel = new JLabel("Asistencia Medica");
 		this.lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		this.lblNewLabel.setAlignmentX(0.5f);
@@ -253,4 +254,24 @@ public class PanelPrincipal extends JFrame implements IVista {
 		this.setVisible(visible);
 	}
 	
+	public void keyPressed(KeyEvent e) {
+	}
+	public void keyReleased(KeyEvent e) {
+	}
+	
+	//En el puerto solo se pueden escribir números
+	public void keyTyped(KeyEvent e) {
+		int key = e.getKeyChar();
+
+	    boolean numeros = key >= 48 && key <= 57;
+	        
+	    if (!numeros)
+	    {
+	        e.consume();
+	    }
+
+	    if (textFieldPuerto.getText().trim().length() == 10) {
+	        e.consume();
+	    }
+	}
 }
