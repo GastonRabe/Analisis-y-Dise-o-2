@@ -8,5 +8,7 @@ public interface IVista {
 	
 	void nuevoMensaje(String tipo, String hora, String lugar);
 	
-	
+	boolean getRdbtnMedico();
+	boolean getRdbtnIncendio();
+	boolean getRdbtnSeguridad();
 }

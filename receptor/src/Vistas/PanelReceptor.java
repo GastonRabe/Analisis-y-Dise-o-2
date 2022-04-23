@@ -293,6 +293,24 @@ public class PanelReceptor extends JFrame implements IVista {
         sonido.play();
 	}
 
+	@Override
+	public boolean getRdbtnMedico() {
+		// TODO Auto-generated method stub
+		return this.rdbtnAsistenciaMedica.isSelected();
+	}
+
+	@Override
+	public boolean getRdbtnIncendio() {
+		// TODO Auto-generated method stub
+		return this.rdbtnIncendio.isSelected();
+	}
+
+	@Override
+	public boolean getRdbtnSeguridad() {
+		// TODO Auto-generated method stub
+		return this.rdbtnSeguridad.isSelected();
+	}
+
 	
 	
 }

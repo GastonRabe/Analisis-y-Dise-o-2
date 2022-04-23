@@ -39,7 +39,12 @@ public class Controlador implements ActionListener, Observer{
 		// TODO Auto-generated method stub
 		String mensaje = (String) arg;
 		if(o.equals(ServidorRecepcion.getInstance())) {
-			this.ventana.nuevoMensaje(ServidorRecepcion.getInstance().getTipo(), ServidorRecepcion.getInstance().getHora(), ServidorRecepcion.getInstance().getLugar());
+			String tipo = ServidorRecepcion.getInstance().getTipo();
+			if((tipo.equals("Medico") && this.ventana.getRdbtnMedico()) || (tipo.equals("Foco Incendio") && this.ventana.getRdbtnIncendio()) || (tipo.equals("Seguridad") && this.ventana.getRdbtnSeguridad())) {
+				this.ventana.nuevoMensaje(tipo, ServidorRecepcion.getInstance().getHora(), ServidorRecepcion.getInstance().getLugar());
+			}else {
+				ServidorRecepcion.getInstance().mandarMensaje("rechazado");
+			}
 		}
 	}
 
