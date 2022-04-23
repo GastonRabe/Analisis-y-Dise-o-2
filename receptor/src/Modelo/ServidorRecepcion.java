@@ -37,7 +37,6 @@ public class ServidorRecepcion extends Observable implements Runnable{
 	public void run() {
 		try {
             this.ss = new ServerSocket(1233);
-            System.out.println("Escuchando");
 
             while (true) {
 
@@ -53,7 +52,6 @@ public class ServidorRecepcion extends Observable implements Runnable{
                 this.hora = LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute() ;
                 this.setChanged();
         		this.notifyObservers();
-                System.out.println(msg);
             }
 
         } catch (Exception e) {

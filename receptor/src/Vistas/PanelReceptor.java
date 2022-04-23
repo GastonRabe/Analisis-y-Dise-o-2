@@ -178,11 +178,11 @@ public class PanelReceptor extends JFrame implements IVista {
 		this.panel_2.add(this.rdbtnAsistenciaMedica);
 		
 		this.rdbtnSeguridad = new JRadioButton("Personal de seguridad");
-		this.rdbtnSeguridad.setBounds(34, 29, 237, 30);
+		this.rdbtnSeguridad.setBounds(34, 60, 237, 30);
 		this.panel_2.add(this.rdbtnSeguridad);
 		
 		this.rdbtnIncendio = new JRadioButton("Foco de incendio");
-		this.rdbtnIncendio.setBounds(34, 60, 237, 30);
+		this.rdbtnIncendio.setBounds(34, 29, 237, 30);
 		this.panel_2.add(this.rdbtnIncendio);
 		
 		this.panel_5 = new JPanel();
@@ -256,12 +256,13 @@ public class PanelReceptor extends JFrame implements IVista {
 		this.panel_8.setLayout(null);
 		
 		this.btn_ConfirmarRecepcion = new JButton("Confirmar Recepcion");
-		this.btn_ConfirmarRecepcion.setBounds(29, 31, 179, 29);
+		this.btn_ConfirmarRecepcion.setBounds(10, 31, 217, 29);
 		this.btn_ConfirmarRecepcion.setToolTipText("");
 		this.btn_ConfirmarRecepcion.setForeground(Color.WHITE);
 		this.btn_ConfirmarRecepcion.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		this.btn_ConfirmarRecepcion.setBackground(Color.BLACK);
 		this.btn_ConfirmarRecepcion.setActionCommand("ConfirmarRecepcion");
+		
 		this.panel_8.add(this.btn_ConfirmarRecepcion);
 		this.setVisible(true);
 		try {
@@ -273,7 +274,6 @@ public class PanelReceptor extends JFrame implements IVista {
 	}
 
 	public void getFieldLugar(String a) {
-		System.out.println("estoy ");
 		this.textField_lugar.setText(a);
 	}
 
