@@ -258,14 +258,15 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.panel_8.setLayout(null);
 		
 		this.btn_ConfirmarRecepcion = new JButton("Confirmar Recepcion");
+		this.btn_ConfirmarRecepcion.setEnabled(false);
 		this.btn_ConfirmarRecepcion.setBounds(29, 31, 200, 29);
 		this.btn_ConfirmarRecepcion.setToolTipText("");
 		this.btn_ConfirmarRecepcion.setForeground(Color.BLACK);
 		this.btn_ConfirmarRecepcion.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.btn_ConfirmarRecepcion.setBackground(Color.WHITE);
+		this.btn_ConfirmarRecepcion.setBackground(SystemColor.menu);
 		this.btn_ConfirmarRecepcion.setActionCommand("ConfirmarRecepcion");
 		this.panel_8.add(this.btn_ConfirmarRecepcion);
-		this.setVisible(true);
+		
 		try {
 			this.textFieldIP.setText(InetAddress.getLocalHost().getHostAddress());
 			
@@ -276,10 +277,11 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.setVisible(true);
 	}
 
 	public void getFieldLugar(String a) {
-		System.out.println("estoy ");
+		
 		this.textField_lugar.setText(a);
 	}
 
@@ -340,5 +342,9 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
         if (textFieldPuerto.getText().trim().length() == 4) {
             e.consume();
         }
+	}
+	
+	public void setBtnRecepcion(boolean a) {
+		this.btn_ConfirmarRecepcion.setEnabled(a);
 	}
 }
