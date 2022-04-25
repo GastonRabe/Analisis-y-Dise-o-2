@@ -32,6 +32,7 @@ public class ConectaServidor extends Observable implements Runnable {
 				String mensaje = this.in.readLine();
 				this.setChanged();
         		this.notifyObservers(mensaje);
+				System.out.println(mensaje);
 				this.bool = false;
 				// socket.close();
 				// jTextArea1.setText("");

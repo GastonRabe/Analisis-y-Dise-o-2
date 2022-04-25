@@ -148,7 +148,7 @@ public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 		this.panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		this.panelPrincipal.add(this.panel);
 		
-		this.lblNewLabel = new JLabel("Asistencia Medica");
+		this.lblNewLabel = new JLabel("Asistencia M\u00E9dica");
 		this.lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		this.lblNewLabel.setAlignmentX(0.5f);
@@ -258,20 +258,18 @@ public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 	}
 	public void keyReleased(KeyEvent e) {
 	}
-	
-	//En el puerto solo se pueden escribir números
 	public void keyTyped(KeyEvent e) {
 		int key = e.getKeyChar();
 
-	    boolean numeros = key >= 48 && key <= 57;
-	        
-	    if (!numeros)
-	    {
-	        e.consume();
-	    }
+        boolean numeros = key >= 48 && key <= 57;
 
-	    if (textFieldPuerto.getText().trim().length() == 10) {
-	        e.consume();
-	    }
+        if (!numeros)
+        {
+            e.consume();
+        }
+
+        if (textFieldPuerto.getText().trim().length() == 4) {
+            e.consume();
+        }
 	}
 }

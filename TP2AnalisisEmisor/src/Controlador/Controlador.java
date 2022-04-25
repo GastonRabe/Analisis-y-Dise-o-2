@@ -21,25 +21,26 @@ public class Controlador implements ActionListener, Observer{
 		this.vista.setActionListener(this);
 		
 	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String accion = (String) e.getActionCommand();
+		
 		
 		if(accion.equals("Foco Incendio") || accion.equals("Seguridad") || accion.equals("Medico")) {
 			String puerto = this.vista.getPuerto();
 			String ip = this.vista.getIp();
 			String puesto = this.vista.getPuesto();
-			ip=ip.trim();
+			ip= ip.trim();
 			if(puerto == null || puerto.equals("")) {
 				this.vista.showMensaje("Ingrese un puerto");
 			}else if(ip == null || ip.equals("") || ip.isEmpty()) {
 				this.vista.showMensaje("Ingrese una IP");
-			}else if(puesto == null || puesto.equals("") || puesto.trim().length()==0) {
-				this.vista.showMensaje("Ingrese un puesto de trabajo");
+			}else if(puesto == null || puesto.equals("") || puesto.trim().length() == 0) {
+				this.vista.showMensaje("Ingrese un puesto");
 			}else {
 				String mensaje = accion + "@" + puesto;
 				ConectaServidor servicio = new ConectaServidor(ip, Integer.parseInt(puerto), mensaje);
+				
 				this.vista.visible(false);
 				this.panel = new PanelAvisoRecepcion(accion, puesto);
 				this.panel.setActionListener(this);

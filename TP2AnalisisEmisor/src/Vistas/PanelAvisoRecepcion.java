@@ -87,31 +87,31 @@ public class PanelAvisoRecepcion extends JFrame implements IVista {
 		this.textField_tipo = new JTextField();
 		this.textField_tipo.setEditable(false);
 		this.textField_tipo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.textField_tipo.setBounds(54, 8, 119, 20);
+		this.textField_tipo.setBounds(54, 8, 86, 20);
 		this.panel_2.add(this.textField_tipo);
 		this.textField_tipo.setColumns(10);
 		
 		this.lblNewLabel_3 = new JLabel("Lugar:");
 		this.lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.lblNewLabel_3.setBounds(253, 10, 50, 17);
+		this.lblNewLabel_3.setBounds(276, 10, 50, 17);
 		this.panel_2.add(this.lblNewLabel_3);
 		
 		this.textField_lugar = new JTextField();
 		this.textField_lugar.setEditable(false);
 		this.textField_lugar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.textField_lugar.setBounds(306, 8, 106, 20);
+		this.textField_lugar.setBounds(326, 8, 86, 20);
 		this.panel_2.add(this.textField_lugar);
 		this.textField_lugar.setColumns(10);
 		
 		this.lblNewLabel_4 = new JLabel("Hora:");
 		this.lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.lblNewLabel_4.setBounds(168, 39, 49, 14);
+		this.lblNewLabel_4.setBounds(143, 39, 49, 14);
 		this.panel_2.add(this.lblNewLabel_4);
 		
 		this.textField_hora = new JTextField();
 		this.textField_hora.setEditable(false);
 		this.textField_hora.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.textField_hora.setBounds(213, 36, 58, 20);
+		this.textField_hora.setBounds(187, 36, 86, 20);
 		this.panel_2.add(this.textField_hora);
 		this.textField_hora.setColumns(10);
 		
@@ -122,7 +122,7 @@ public class PanelAvisoRecepcion extends JFrame implements IVista {
 		
 		this.btnNewButton = new JButton("OK");
 		this.btnNewButton.setEnabled(false);
-		this.btnNewButton.setBounds(181, 101, 85, 21);
+		this.btnNewButton.setBounds(180, 110, 85, 21);
 		this.panel_1.add(this.btnNewButton);
 		
 		this.txtNoRecibida = new JTextField();
