@@ -20,6 +20,7 @@ import java.awt.FlowLayout;
 import javax.swing.border.MatteBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListener {
 
@@ -97,13 +98,13 @@ public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListene
 		
 		this.lblNewLabel_3 = new JLabel("Lugar:");
 		this.lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.lblNewLabel_3.setBounds(262, 10, 50, 17);
+		this.lblNewLabel_3.setBounds(248, 10, 50, 17);
 		this.panel_2.add(this.lblNewLabel_3);
 		
 		this.textField_lugar = new JTextField();
 		this.textField_lugar.setEditable(false);
 		this.textField_lugar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.textField_lugar.setBounds(310, 8, 120, 20);
+		this.textField_lugar.setBounds(298, 8, 120, 20);
 		this.panel_2.add(this.textField_lugar);
 		this.textField_lugar.setColumns(10);
 		
@@ -125,12 +126,14 @@ public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListene
 		this.panel_1.setLayout(null);
 		
 		this.btnNewButton = new JButton("OK");
+		this.btnNewButton.setBackground(SystemColor.inactiveCaption);
 		this.btnNewButton.addActionListener(this);
 		this.btnNewButton.setEnabled(false);
 		this.btnNewButton.setBounds(180, 110, 85, 21);
 		this.panel_1.add(this.btnNewButton);
 		
 		this.txtNoRecibida = new JTextField();
+		this.txtNoRecibida.setHorizontalAlignment(SwingConstants.CENTER);
 		this.txtNoRecibida.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		this.txtNoRecibida.setText("No Recibida");
 		this.txtNoRecibida.setEditable(false);

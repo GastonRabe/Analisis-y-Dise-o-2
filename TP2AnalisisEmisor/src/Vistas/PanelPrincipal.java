@@ -127,19 +127,19 @@ public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 		this.panel_7.setLayout(null);
 		
 		this.textFieldPuesto = new JTextField();
-		this.textFieldPuesto.setBounds(10, 82, 171, 20);
+		this.textFieldPuesto.setBounds(20, 82, 171, 20);
 		this.panel_7.add(this.textFieldPuesto);
 		this.textFieldPuesto.setColumns(10);
 		
 		this.textFieldPuerto = new JTextField();
 		this.textFieldPuerto.addKeyListener(this);
-		this.textFieldPuerto.setBounds(10, 51, 171, 20);
+		this.textFieldPuerto.setBounds(20, 51, 171, 20);
 		this.panel_7.add(this.textFieldPuerto);
 		this.textFieldPuerto.setColumns(10);
 		
 		this.textFieldIP = new JTextField();
 		
-		this.textFieldIP.setBounds(10, 21, 171, 20);
+		this.textFieldIP.setBounds(20, 20, 171, 20);
 		this.panel_7.add(this.textFieldIP);
 		this.textFieldIP.setColumns(10);
 		
@@ -164,7 +164,7 @@ public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 		this.btn_solicitarMedico.setActionCommand("Medico");
 		btn_solicitarMedico.setForeground(Color.BLACK);
 		btn_solicitarMedico.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btn_solicitarMedico.setBackground(SystemColor.menu);
+		btn_solicitarMedico.setBackground(SystemColor.inactiveCaption);
 		btn_solicitarMedico.setBounds(51, 42, 100, 50);
 		this.panel_1.add(btn_solicitarMedico);
 		
@@ -187,7 +187,7 @@ public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 		this.btn_solicitarIncendio.setActionCommand("Foco Incendio");
 		this.btn_solicitarIncendio.setForeground(Color.BLACK);
 		this.btn_solicitarIncendio.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.btn_solicitarIncendio.setBackground(SystemColor.menu);
+		this.btn_solicitarIncendio.setBackground(SystemColor.inactiveCaption);
 		this.btn_solicitarIncendio.setBounds(50, 41, 100, 50);
 		this.panel_3.add(this.btn_solicitarIncendio);
 		
@@ -211,7 +211,7 @@ public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 		
 		this.btn_solicitarSeguridad.setForeground(Color.BLACK);
 		this.btn_solicitarSeguridad.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.btn_solicitarSeguridad.setBackground(SystemColor.menu);
+		this.btn_solicitarSeguridad.setBackground(SystemColor.inactiveCaption);
 		this.btn_solicitarSeguridad.setBounds(50, 46, 100, 50);
 		this.panel_5.add(this.btn_solicitarSeguridad);
 		
