@@ -11,4 +11,5 @@ public interface IVista {
 	boolean getRdbtnMedico();
 	boolean getRdbtnIncendio();
 	boolean getRdbtnSeguridad();
+	String getPuerto();
 }

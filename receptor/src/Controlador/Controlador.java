@@ -18,8 +18,7 @@ public class Controlador implements ActionListener, Observer{
 	public Controlador() {
 		this.ventana = new PanelReceptor();
 		this.ventana.setActionListener(this);
-		this.hilo = new Thread(ServidorRecepcion.getInstance());
-		this.hilo.start();
+		
 		ServidorRecepcion.getInstance().addObserver(this);
 	}
 
@@ -31,6 +30,13 @@ public class Controlador implements ActionListener, Observer{
 		if(accion.equals("ConfirmarRecepcion")) {
 			ServidorRecepcion.getInstance().mandarMensaje(accion);
 			//System.out.println("envio");
+		}else if(accion.equals("Escuchar")) {
+			String puerto = this.ventana.getPuerto();
+			if(puerto == null || puerto.equals("")) {
+				ServidorRecepcion.getInstance().setPuerto(Integer.parseInt(puerto));
+				this.hilo = new Thread(ServidorRecepcion.getInstance());
+				this.hilo.start();
+			}
 		}
 	}
 

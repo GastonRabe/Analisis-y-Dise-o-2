@@ -20,6 +20,7 @@ public class ServidorRecepcion extends Observable implements Runnable{
 	private BufferedReader in;
 	private static ServidorRecepcion instance =null;
 	private String tipo, hora, lugar;
+	private int puerto;
 	
 	private ServidorRecepcion () {
 		
@@ -36,7 +37,8 @@ public class ServidorRecepcion extends Observable implements Runnable{
 	@Override
 	public void run() {
 		try {
-            this.ss = new ServerSocket(1233);
+            this.ss = new ServerSocket(this.puerto);
+            System.out.println("Escuchando");
 
             while (true) {
 
@@ -52,6 +54,7 @@ public class ServidorRecepcion extends Observable implements Runnable{
                 this.hora = LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute() ;
                 this.setChanged();
         		this.notifyObservers();
+               
             }
 
         } catch (Exception e) {
@@ -88,5 +91,11 @@ public class ServidorRecepcion extends Observable implements Runnable{
 		this.lugar = lugar;
 	}
 	
+	public int getPuerto() {
+		return this.puerto;
+	}
 	
+	public void setPuerto(int puerto) {
+		this.puerto = puerto;
+	}
 }

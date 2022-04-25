@@ -33,8 +33,10 @@ import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import java.awt.FlowLayout;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 
-public class PanelReceptor extends JFrame implements IVista {
+public class PanelReceptor extends JFrame implements IVista, KeyListener {
 
 	private static PanelReceptor instance;
 	private JPanel contentPane;
@@ -65,6 +67,7 @@ public class PanelReceptor extends JFrame implements IVista {
 	private JLabel lblNewLabel_4;
 	private JTextField textFieldPuerto;
 	private JTextField textFieldIP;
+	private JButton btn_escuchar;
 
 	/**
 	 * Launch the application.
@@ -135,12 +138,12 @@ public class PanelReceptor extends JFrame implements IVista {
 		
 		this.lblNewLabel_1 = new JLabel("IP:");
 		this.lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.lblNewLabel_1.setBounds(84, 20, 57, 26);
+		this.lblNewLabel_1.setBounds(84, 10, 57, 26);
 		this.panel_10.add(this.lblNewLabel_1);
 		
 		this.lblNewLabel_4 = new JLabel("Puerto:");
 		this.lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.lblNewLabel_4.setBounds(71, 50, 103, 28);
+		this.lblNewLabel_4.setBounds(71, 35, 103, 28);
 		this.panel_10.add(this.lblNewLabel_4);
 		
 		this.panel_11 = new JPanel();
@@ -148,15 +151,14 @@ public class PanelReceptor extends JFrame implements IVista {
 		this.panel_11.setLayout(null);
 		
 		this.textFieldPuerto = new JTextField();
-		this.textFieldPuerto.setText("1233");
-		this.textFieldPuerto.setEditable(false);
-		this.textFieldPuerto.setBounds(35, 55, 163, 20);
+		this.textFieldPuerto.addKeyListener(this);
+		this.textFieldPuerto.setBounds(35, 40, 163, 20);
 		this.panel_11.add(this.textFieldPuerto);
 		this.textFieldPuerto.setColumns(10);
 		
 		this.textFieldIP = new JTextField();
 		this.textFieldIP.setEditable(false);
-		this.textFieldIP.setBounds(35, 20, 163, 20);
+		this.textFieldIP.setBounds(35, 10, 163, 20);
 		this.panel_11.add(this.textFieldIP);
 		this.textFieldIP.setColumns(10);
 		
@@ -178,11 +180,11 @@ public class PanelReceptor extends JFrame implements IVista {
 		this.panel_2.add(this.rdbtnAsistenciaMedica);
 		
 		this.rdbtnSeguridad = new JRadioButton("Personal de seguridad");
-		this.rdbtnSeguridad.setBounds(34, 60, 237, 30);
+		this.rdbtnSeguridad.setBounds(34, 29, 237, 30);
 		this.panel_2.add(this.rdbtnSeguridad);
 		
 		this.rdbtnIncendio = new JRadioButton("Foco de incendio");
-		this.rdbtnIncendio.setBounds(34, 29, 237, 30);
+		this.rdbtnIncendio.setBounds(34, 60, 237, 30);
 		this.panel_2.add(this.rdbtnIncendio);
 		
 		this.panel_5 = new JPanel();
@@ -256,17 +258,20 @@ public class PanelReceptor extends JFrame implements IVista {
 		this.panel_8.setLayout(null);
 		
 		this.btn_ConfirmarRecepcion = new JButton("Confirmar Recepcion");
-		this.btn_ConfirmarRecepcion.setBounds(10, 31, 217, 29);
+		this.btn_ConfirmarRecepcion.setBounds(29, 31, 200, 29);
 		this.btn_ConfirmarRecepcion.setToolTipText("");
-		this.btn_ConfirmarRecepcion.setForeground(Color.WHITE);
+		this.btn_ConfirmarRecepcion.setForeground(Color.BLACK);
 		this.btn_ConfirmarRecepcion.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.btn_ConfirmarRecepcion.setBackground(Color.BLACK);
+		this.btn_ConfirmarRecepcion.setBackground(Color.WHITE);
 		this.btn_ConfirmarRecepcion.setActionCommand("ConfirmarRecepcion");
-		
 		this.panel_8.add(this.btn_ConfirmarRecepcion);
 		this.setVisible(true);
 		try {
 			this.textFieldIP.setText(InetAddress.getLocalHost().getHostAddress());
+			
+			btn_escuchar = new JButton("Escuchar");
+			btn_escuchar.setBounds(70, 65, 105, 21);
+			this.panel_11.add(btn_escuchar);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -274,6 +279,7 @@ public class PanelReceptor extends JFrame implements IVista {
 	}
 
 	public void getFieldLugar(String a) {
+		System.out.println("estoy ");
 		this.textField_lugar.setText(a);
 	}
 
@@ -281,6 +287,7 @@ public class PanelReceptor extends JFrame implements IVista {
 	public void setActionListener(ActionListener a) {
 		// TODO Auto-generated method stub
 		this.btn_ConfirmarRecepcion.addActionListener(a);
+		this.btn_escuchar.addActionListener(a);
 	}
 
 	@Override
@@ -311,6 +318,27 @@ public class PanelReceptor extends JFrame implements IVista {
 		return this.rdbtnSeguridad.isSelected();
 	}
 
-	
-	
+	@Override
+	public String getPuerto() {
+		// TODO Auto-generated method stub
+		return textFieldPuerto.getText();
+	}
+	public void keyPressed(KeyEvent e) {
+	}
+	public void keyReleased(KeyEvent e) {
+	}
+	public void keyTyped(KeyEvent e) {
+		int key = e.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros)
+        {
+            e.consume();
+        }
+
+        if (textFieldPuerto.getText().trim().length() == 4) {
+            e.consume();
+        }
+	}
 }
