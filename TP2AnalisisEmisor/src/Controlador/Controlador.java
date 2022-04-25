@@ -2,6 +2,7 @@ package Controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,7 +15,7 @@ public class Controlador implements ActionListener, Observer{
 
 	private Thread servidor;
 	private IVista vista;
-	private IVista panel;
+	private ArrayList<IVista> panel = new ArrayList<IVista>();
 	
 	public Controlador () {
 		this.vista = new PanelPrincipal();
@@ -41,9 +42,9 @@ public class Controlador implements ActionListener, Observer{
 				String mensaje = accion + "@" + puesto;
 				ConectaServidor servicio = new ConectaServidor(ip, Integer.parseInt(puerto), mensaje);
 				
-				this.vista.visible(false);
-				this.panel = new PanelAvisoRecepcion(accion, puesto);
-				this.panel.setActionListener(this);
+				//this.vista.visible(false);
+				this.panel.add(new PanelAvisoRecepcion(accion, puesto, puerto));
+				
 				this.servidor  = new Thread(servicio);
 				servicio.addObserver(this);
 				this.servidor.start();
@@ -52,19 +53,25 @@ public class Controlador implements ActionListener, Observer{
 				}
 				this.vista.visible(true);*/
 			}
-		}else if(accion.equals("OK")) {
-			this.panel.visible(false);
-			this.vista.visible(true);
 		}
+		
 	}
 	@Override
 	public void update(Observable o, Object arg) {
 		String mensaje = (String) arg;
 		
-		if(mensaje.equals("rechazado")) {
-			this.panel.showMensaje("Rechazado");
+		if(mensaje.contains("rechazado")) {
+			this.panel.get(this.panel.size()-1).showMensaje("Rechazado");
+			this.panel.remove(this.panel.size()-1);
 		}else {
-			this.panel.showMensaje("Recibido");
+			int aux = mensaje.indexOf('@');
+			String puerto = mensaje.substring(aux+1, mensaje.length());
+			int i=0;
+			while(i<this.panel.size() && !this.panel.get(i).getPuerto().equals(puerto)) {
+				i++;
+			}
+			this.panel.get(i).showMensaje("Recibido");
+			this.panel.remove(i);
 		}
 		
 		

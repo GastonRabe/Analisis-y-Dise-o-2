@@ -162,9 +162,9 @@ public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 		
 		btn_solicitarMedico = new JButton("Solicitar");
 		this.btn_solicitarMedico.setActionCommand("Medico");
-		btn_solicitarMedico.setForeground(Color.WHITE);
+		btn_solicitarMedico.setForeground(Color.BLACK);
 		btn_solicitarMedico.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btn_solicitarMedico.setBackground(Color.BLACK);
+		btn_solicitarMedico.setBackground(SystemColor.menu);
 		btn_solicitarMedico.setBounds(51, 42, 100, 50);
 		this.panel_1.add(btn_solicitarMedico);
 		
@@ -185,9 +185,9 @@ public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 		
 		this.btn_solicitarIncendio = new JButton("Solicitar");
 		this.btn_solicitarIncendio.setActionCommand("Foco Incendio");
-		this.btn_solicitarIncendio.setForeground(Color.WHITE);
+		this.btn_solicitarIncendio.setForeground(Color.BLACK);
 		this.btn_solicitarIncendio.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.btn_solicitarIncendio.setBackground(Color.BLACK);
+		this.btn_solicitarIncendio.setBackground(SystemColor.menu);
 		this.btn_solicitarIncendio.setBounds(50, 41, 100, 50);
 		this.panel_3.add(this.btn_solicitarIncendio);
 		
@@ -209,9 +209,9 @@ public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 		this.btn_solicitarSeguridad = new JButton("Solicitar");
 		this.btn_solicitarSeguridad.setActionCommand("Seguridad");
 		
-		this.btn_solicitarSeguridad.setForeground(Color.WHITE);
+		this.btn_solicitarSeguridad.setForeground(Color.BLACK);
 		this.btn_solicitarSeguridad.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.btn_solicitarSeguridad.setBackground(Color.BLACK);
+		this.btn_solicitarSeguridad.setBackground(SystemColor.menu);
 		this.btn_solicitarSeguridad.setBounds(50, 46, 100, 50);
 		this.panel_5.add(this.btn_solicitarSeguridad);
 		

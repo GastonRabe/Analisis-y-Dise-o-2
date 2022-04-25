@@ -12,14 +12,16 @@ import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
+import java.util.Formatter;
 import java.awt.GridLayout;
 import java.awt.Color;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import javax.swing.border.MatteBorder;
 import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 
-public class PanelAvisoRecepcion extends JFrame implements IVista {
+public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListener {
 
 	private JPanel contentPane;
 	private JPanel panel;
@@ -34,6 +36,7 @@ public class PanelAvisoRecepcion extends JFrame implements IVista {
 	private JTextField textField_hora;
 	private JButton btnNewButton;
 	private JTextField txtNoRecibida;
+	private String puerto;
 
 	/**
 	 * Launch the application.
@@ -54,7 +57,8 @@ public class PanelAvisoRecepcion extends JFrame implements IVista {
 	/**
 	 * Create the frame.
 	 */
-	public PanelAvisoRecepcion(String tipo, String lugar) {
+	public PanelAvisoRecepcion(String tipo, String lugar, String puerto) {
+		this.puerto = puerto;
 		setBackground(SystemColor.inactiveCaptionText);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -87,19 +91,19 @@ public class PanelAvisoRecepcion extends JFrame implements IVista {
 		this.textField_tipo = new JTextField();
 		this.textField_tipo.setEditable(false);
 		this.textField_tipo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.textField_tipo.setBounds(54, 8, 86, 20);
+		this.textField_tipo.setBounds(54, 8, 138, 20);
 		this.panel_2.add(this.textField_tipo);
 		this.textField_tipo.setColumns(10);
 		
 		this.lblNewLabel_3 = new JLabel("Lugar:");
 		this.lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.lblNewLabel_3.setBounds(276, 10, 50, 17);
+		this.lblNewLabel_3.setBounds(262, 10, 50, 17);
 		this.panel_2.add(this.lblNewLabel_3);
 		
 		this.textField_lugar = new JTextField();
 		this.textField_lugar.setEditable(false);
 		this.textField_lugar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.textField_lugar.setBounds(326, 8, 86, 20);
+		this.textField_lugar.setBounds(310, 8, 120, 20);
 		this.panel_2.add(this.textField_lugar);
 		this.textField_lugar.setColumns(10);
 		
@@ -121,6 +125,7 @@ public class PanelAvisoRecepcion extends JFrame implements IVista {
 		this.panel_1.setLayout(null);
 		
 		this.btnNewButton = new JButton("OK");
+		this.btnNewButton.addActionListener(this);
 		this.btnNewButton.setEnabled(false);
 		this.btnNewButton.setBounds(180, 110, 85, 21);
 		this.panel_1.add(this.btnNewButton);
@@ -135,7 +140,9 @@ public class PanelAvisoRecepcion extends JFrame implements IVista {
 		
 		this.textField_lugar.setText(lugar);
 		this.textField_tipo.setText(tipo);
-		this.textField_hora.setText(LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+		Formatter fmt = new Formatter();
+		String aux = fmt.format("%02d",LocalDateTime.now().getHour()) + ":" + fmt.format("%02d",LocalDateTime.now().getMinute());
+		this.textField_hora.setText(aux);
 		
 		this.setVisible(true);
 	}
@@ -143,7 +150,7 @@ public class PanelAvisoRecepcion extends JFrame implements IVista {
 	@Override
 	public String getPuerto() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.puerto;
 	}
 
 	@Override
@@ -174,5 +181,12 @@ public class PanelAvisoRecepcion extends JFrame implements IVista {
 		this.setVisible(false);
 		this.dispose();
 		
+	}
+	public void actionPerformed(ActionEvent e) {
+		String accion = (String) e.getActionCommand();
+		
+		if(accion.equals("OK")) {
+			this.visible(false);
+		}
 	}
 }
