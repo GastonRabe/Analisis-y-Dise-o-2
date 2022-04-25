@@ -41,7 +41,6 @@ public class ServidorRecepcion extends Observable implements Runnable{
 	public void run() {
 		try {
             this.ss = new ServerSocket(this.puerto);
-            System.out.println("Escuchando");
 
             while (true) {
 

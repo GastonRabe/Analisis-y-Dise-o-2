@@ -263,7 +263,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.btn_ConfirmarRecepcion.setToolTipText("");
 		this.btn_ConfirmarRecepcion.setForeground(Color.BLACK);
 		this.btn_ConfirmarRecepcion.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.btn_ConfirmarRecepcion.setBackground(SystemColor.menu);
+		this.btn_ConfirmarRecepcion.setBackground(SystemColor.inactiveCaption);
 		this.btn_ConfirmarRecepcion.setActionCommand("ConfirmarRecepcion");
 		this.panel_8.add(this.btn_ConfirmarRecepcion);
 		
@@ -271,6 +271,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 			this.textFieldIP.setText(InetAddress.getLocalHost().getHostAddress());
 			
 			btn_escuchar = new JButton("Escuchar");
+			this.btn_escuchar.setBackground(SystemColor.inactiveCaption);
 			btn_escuchar.setBounds(70, 65, 105, 21);
 			this.panel_11.add(btn_escuchar);
 		} catch (UnknownHostException e) {

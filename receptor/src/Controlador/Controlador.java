@@ -6,6 +6,8 @@ import java.util.EventListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JOptionPane;
+
 import Modelo.ServidorRecepcion;
 import Vistas.PanelReceptor;
 
@@ -32,12 +34,13 @@ public class Controlador implements ActionListener, Observer{
 			//System.out.println("envio");
 		}else if(accion.equals("Escuchar")) {
 			String puerto = this.ventana.getPuerto();
-			if(puerto != null || !puerto.equals("")) {
+			if(puerto != null && !puerto.equals("")) {
 				ServidorRecepcion.getInstance().setPuerto(Integer.parseInt(puerto));
 				this.hilo = new Thread(ServidorRecepcion.getInstance());
 				this.hilo.start();
 				this.ventana.setBtnRecepcion(true);
 			}
+			else  JOptionPane.showMessageDialog(null,"Debe ingresar un puerto");
 		}
 	}
 
