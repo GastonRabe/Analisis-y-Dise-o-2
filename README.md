@@ -1,5 +1,3 @@
-#Manual de instalacion:
-
 Manual de instalación, configuración y operación
 
 1- Verificar tener instalado Java en su computadora, con una versión de Jdk 15 o 16. 
