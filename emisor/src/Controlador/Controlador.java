@@ -16,6 +16,7 @@ public class Controlador implements ActionListener, Observer{
 	private Thread servidor;
 	private IVista vista;
 	private ArrayList<IVista> panel = new ArrayList<IVista>();
+	private ConectaServidor servicio;
 	
 	public Controlador () {
 		this.vista = new PanelPrincipal();
@@ -40,7 +41,7 @@ public class Controlador implements ActionListener, Observer{
 				this.vista.showMensaje("Ingrese un puesto");
 			}else {
 				String mensaje = accion + "@" + puesto;
-				ConectaServidor servicio = new ConectaServidor(ip, Integer.parseInt(puerto), mensaje);
+				servicio = new ConectaServidor(ip, Integer.parseInt(puerto), mensaje);
 				
 				//this.vista.visible(false);
 				this.panel.add(new PanelAvisoRecepcion(accion, puesto, puerto));
