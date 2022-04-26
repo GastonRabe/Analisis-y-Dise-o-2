@@ -14,4 +14,5 @@ public interface IVista {
 	boolean getRdbtnSeguridad();
 	String getPuerto();
 	void setBtnRecepcion(boolean a);
+	void setBtnEscuchar(boolean a);
 }

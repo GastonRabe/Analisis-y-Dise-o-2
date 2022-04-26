@@ -380,6 +380,8 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.btn_ConfirmarRecepcion.setEnabled(a);
 	}
 
-	
+	public void setBtnEscuchar(boolean a) {
+		this.btn_escuchar.setEnabled(a);
+	}
 	
 }

@@ -81,7 +81,7 @@ public class ServidorRecepcion extends Observable implements Runnable{
 			this.outs.get(this.outs.size() -1).println(msg);
 			this.outs.remove(this.outs.size() -1);
 			this.ins.remove(this.ins.size() -1);
-			this.horas.remove(this.ins.size() -1);
+			this.horas.remove(this.horas.size() -1);
 		}else {
 			if (outs.size()>0)
 			{

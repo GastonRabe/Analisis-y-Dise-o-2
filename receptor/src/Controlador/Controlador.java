@@ -40,6 +40,7 @@ public class Controlador implements ActionListener, Observer{
 				this.hilo = new Thread(ServidorRecepcion.getInstance());
 				this.hilo.start();
 				this.ventana.setBtnRecepcion(true);
+				this.ventana.setBtnEscuchar(false);
 			}
 			else  JOptionPane.showMessageDialog(null,"Debe ingresar un puerto");
 		}
