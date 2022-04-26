@@ -56,7 +56,6 @@ public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 	private JPanel panel_7;
 	private JLabel lblNewLabel_4;
 
-	private ConectaServidor servidor;
 	private JTextField textFieldPuerto;
 	private JTextField textFieldIP;
 	private JLabel lblNewLabel_5;

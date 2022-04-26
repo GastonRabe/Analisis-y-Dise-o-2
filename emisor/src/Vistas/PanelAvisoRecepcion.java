@@ -1,11 +1,9 @@
 package Vistas;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.BevelBorder;
@@ -16,7 +14,6 @@ import java.util.Formatter;
 import java.awt.GridLayout;
 import java.awt.Color;
 import javax.swing.JTextField;
-import java.awt.FlowLayout;
 import javax.swing.border.MatteBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
