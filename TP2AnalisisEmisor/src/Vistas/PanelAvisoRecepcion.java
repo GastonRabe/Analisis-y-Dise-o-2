@@ -76,6 +76,7 @@ public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListene
 		this.panel.setLayout(new GridLayout(2, 2, 0, 0));
 		
 		this.lblNewLabel_1 = new JLabel("Alerta Enviada");
+		this.lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		this.panel.add(this.lblNewLabel_1);
 		
@@ -90,6 +91,7 @@ public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListene
 		this.panel_2.add(this.lblNewLabel_2);
 		
 		this.textField_tipo = new JTextField();
+		this.textField_tipo.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textField_tipo.setEditable(false);
 		this.textField_tipo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		this.textField_tipo.setBounds(54, 8, 138, 20);
@@ -102,6 +104,7 @@ public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListene
 		this.panel_2.add(this.lblNewLabel_3);
 		
 		this.textField_lugar = new JTextField();
+		this.textField_lugar.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textField_lugar.setEditable(false);
 		this.textField_lugar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		this.textField_lugar.setBounds(298, 8, 120, 20);
@@ -114,6 +117,7 @@ public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListene
 		this.panel_2.add(this.lblNewLabel_4);
 		
 		this.textField_hora = new JTextField();
+		this.textField_hora.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textField_hora.setEditable(false);
 		this.textField_hora.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		this.textField_hora.setBounds(187, 36, 86, 20);
@@ -143,8 +147,9 @@ public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListene
 		
 		this.textField_lugar.setText(lugar);
 		this.textField_tipo.setText(tipo);
-		Formatter fmt = new Formatter();
-		String aux = fmt.format("%02d",LocalDateTime.now().getHour()) + ":" + fmt.format("%02d",LocalDateTime.now().getMinute());
+		Formatter fmtHora = new Formatter();
+		Formatter fmtMins = new Formatter();
+		String aux = fmtHora.format("%02d",LocalDateTime.now().getHour()) + ":" + fmtMins.format("%02d",LocalDateTime.now().getMinute());
 		this.textField_hora.setText(aux);
 		
 		this.setVisible(true);

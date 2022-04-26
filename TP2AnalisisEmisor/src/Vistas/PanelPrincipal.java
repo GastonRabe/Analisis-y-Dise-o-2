@@ -127,17 +127,20 @@ public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 		this.panel_7.setLayout(null);
 		
 		this.textFieldPuesto = new JTextField();
+		this.textFieldPuesto.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textFieldPuesto.setBounds(20, 82, 171, 20);
 		this.panel_7.add(this.textFieldPuesto);
 		this.textFieldPuesto.setColumns(10);
 		
 		this.textFieldPuerto = new JTextField();
+		this.textFieldPuerto.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textFieldPuerto.addKeyListener(this);
 		this.textFieldPuerto.setBounds(20, 51, 171, 20);
 		this.panel_7.add(this.textFieldPuerto);
 		this.textFieldPuerto.setColumns(10);
 		
 		this.textFieldIP = new JTextField();
+		this.textFieldIP.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		this.textFieldIP.setBounds(20, 20, 171, 20);
 		this.panel_7.add(this.textFieldIP);
@@ -152,7 +155,7 @@ public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 		this.lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		this.lblNewLabel.setAlignmentX(0.5f);
-		this.lblNewLabel.setBounds(22, 58, 150, 28);
+		this.lblNewLabel.setBounds(31, 55, 150, 28);
 		this.panel.add(this.lblNewLabel);
 		
 		this.panel_1 = new JPanel();
@@ -173,47 +176,47 @@ public class PanelPrincipal extends JFrame implements IVista, KeyListener {
 		this.panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		this.panelPrincipal.add(this.panel_2);
 		
-		this.lblNewLabel_1 = new JLabel("Foco de Incendio");
-		this.lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.lblNewLabel_1.setBounds(32, 59, 147, 14);
-		this.panel_2.add(this.lblNewLabel_1);
+		this.lblNewLabel_2 = new JLabel("Personal de Seguridad");
+		this.lblNewLabel_2.setBounds(20, 60, 192, 14);
+		this.panel_2.add(this.lblNewLabel_2);
+		this.lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		this.panel_3 = new JPanel();
 		this.panel_3.setLayout(null);
 		this.panel_3.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		this.panelPrincipal.add(this.panel_3);
 		
-		this.btn_solicitarIncendio = new JButton("Solicitar");
-		this.btn_solicitarIncendio.setActionCommand("Foco Incendio");
-		this.btn_solicitarIncendio.setForeground(Color.BLACK);
-		this.btn_solicitarIncendio.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.btn_solicitarIncendio.setBackground(SystemColor.inactiveCaption);
-		this.btn_solicitarIncendio.setBounds(50, 41, 100, 50);
-		this.panel_3.add(this.btn_solicitarIncendio);
+		this.btn_solicitarSeguridad = new JButton("Solicitar");
+		this.btn_solicitarSeguridad.setBounds(51, 42, 100, 50);
+		this.panel_3.add(this.btn_solicitarSeguridad);
+		this.btn_solicitarSeguridad.setActionCommand("Seguridad");
+		
+		this.btn_solicitarSeguridad.setForeground(Color.BLACK);
+		this.btn_solicitarSeguridad.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		this.btn_solicitarSeguridad.setBackground(SystemColor.inactiveCaption);
 		
 		this.panel_4 = new JPanel();
 		this.panel_4.setLayout(null);
 		this.panel_4.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		this.panelPrincipal.add(this.panel_4);
 		
-		this.lblNewLabel_2 = new JLabel("Personal de Seguridad");
-		this.lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.lblNewLabel_2.setBounds(10, 61, 192, 14);
-		this.panel_4.add(this.lblNewLabel_2);
+		this.lblNewLabel_1 = new JLabel("Foco de Incendio");
+		this.lblNewLabel_1.setBounds(34, 60, 147, 14);
+		this.panel_4.add(this.lblNewLabel_1);
+		this.lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		this.panel_5 = new JPanel();
 		this.panel_5.setLayout(null);
 		this.panel_5.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		this.panelPrincipal.add(this.panel_5);
 		
-		this.btn_solicitarSeguridad = new JButton("Solicitar");
-		this.btn_solicitarSeguridad.setActionCommand("Seguridad");
-		
-		this.btn_solicitarSeguridad.setForeground(Color.BLACK);
-		this.btn_solicitarSeguridad.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.btn_solicitarSeguridad.setBackground(SystemColor.inactiveCaption);
-		this.btn_solicitarSeguridad.setBounds(50, 46, 100, 50);
-		this.panel_5.add(this.btn_solicitarSeguridad);
+		this.btn_solicitarIncendio = new JButton("Solicitar");
+		this.btn_solicitarIncendio.setBounds(51, 42, 100, 50);
+		this.panel_5.add(this.btn_solicitarIncendio);
+		this.btn_solicitarIncendio.setActionCommand("Foco Incendio");
+		this.btn_solicitarIncendio.setForeground(Color.BLACK);
+		this.btn_solicitarIncendio.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		this.btn_solicitarIncendio.setBackground(SystemColor.inactiveCaption);
 		
 		setVisible(true);
 	}
