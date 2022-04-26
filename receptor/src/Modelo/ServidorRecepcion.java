@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Observable;
 
+import Vistas.IVista;
 import Vistas.PanelReceptor;
 
 
@@ -24,9 +26,13 @@ public class ServidorRecepcion extends Observable implements Runnable{
 	private String tipo, hora, lugar;
 	private int puerto;
 	private ArrayList<PrintWriter> outs;
+	private ArrayList<String> ins;
+	private ArrayList<String> horas;
 	
 	private ServidorRecepcion () {
 		this.outs = new ArrayList<PrintWriter>();
+		this.ins = new ArrayList<String>();
+		this.horas = new ArrayList<String>();
 	}
 	
 	public static ServidorRecepcion getInstance() {
@@ -49,11 +55,14 @@ public class ServidorRecepcion extends Observable implements Runnable{
                 this.in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
                 this.outs.add(out);
                 String msg = this.in.readLine();
-                Formatter fmt = new Formatter();
+                this.ins.add(msg);
+                Formatter fmtHora = new Formatter();
+                Formatter fmtMins = new Formatter();
                 int aux = msg.indexOf('@');
                 this.tipo = msg.substring(0, aux);
                 this.lugar = msg.substring(aux+1, msg.length());
-                this.hora = fmt.format("%02d",LocalDateTime.now().getHour()) + ":" + fmt.format("%02d",LocalDateTime.now().getMinute()) ;
+                this.hora = fmtHora.format("%02d",LocalDateTime.now().getHour()) + ":" +fmtMins.format("%02d",LocalDateTime.now().getMinute());
+                this.horas.add(hora);
                 this.setChanged();
         		this.notifyObservers();
                
@@ -65,13 +74,33 @@ public class ServidorRecepcion extends Observable implements Runnable{
         }
 	}
 
-	public void mandarMensaje(String msg) {
+	public void mandarMensaje(String msg, IVista vent) {
 		if(msg.equals("rechazado")) {
 			this.outs.get(this.outs.size() -1).println(msg);
 			this.outs.remove(this.outs.size() -1);
+			this.ins.remove(this.ins.size() -1);
+			this.horas.remove(this.ins.size() -1);
 		}else {
 			this.outs.get(0).println(msg);
 			this.outs.remove(0);
+			this.ins.remove(0);
+			this.horas.remove(0);
+			
+			if (outs.size()==0)
+				vent.actualizarFields("","","");
+			else
+			{
+				Formatter fmtHora = new Formatter();
+                Formatter fmtMins = new Formatter();
+                String mensaje=ins.get(0);
+                String hora=horas.get(0);
+                int aux = mensaje.indexOf('@');
+                vent.actualizarFields(mensaje.substring(0, aux), hora, mensaje.substring(aux+1, mensaje.length()));
+			}
+            
+            
+			
+			
 		}
 		
 	}

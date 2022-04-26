@@ -35,6 +35,7 @@ import javax.swing.JTextArea;
 import java.awt.FlowLayout;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import javax.swing.JScrollPane;
 
 public class PanelReceptor extends JFrame implements IVista, KeyListener {
 
@@ -68,6 +69,8 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 	private JTextField textFieldPuerto;
 	private JTextField textFieldIP;
 	private JButton btn_escuchar;
+	private JTextArea textArea;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -151,12 +154,14 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.panel_11.setLayout(null);
 		
 		this.textFieldPuerto = new JTextField();
+		this.textFieldPuerto.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textFieldPuerto.addKeyListener(this);
 		this.textFieldPuerto.setBounds(35, 40, 163, 20);
 		this.panel_11.add(this.textFieldPuerto);
 		this.textFieldPuerto.setColumns(10);
 		
 		this.textFieldIP = new JTextField();
+		this.textFieldIP.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textFieldIP.setEditable(false);
 		this.textFieldIP.setBounds(35, 10, 163, 20);
 		this.panel_11.add(this.textFieldIP);
@@ -203,6 +208,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 40));
 		
 		this.textField_tipo = new JTextField();
+		this.textField_tipo.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textField_tipo.setEditable(false);
 		this.textField_tipo.setColumns(20);
 		this.textField_tipo.setBackground(Color.WHITE);
@@ -224,6 +230,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 40));
 		
 		this.textField_hora = new JTextField();
+		this.textField_hora.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textField_hora.setEditable(false);
 		this.textField_hora.setColumns(20);
 		this.textField_hora.setBackground(Color.WHITE);
@@ -245,6 +252,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.panel_6.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 40));
 		
 		this.textField_lugar = new JTextField();
+		this.textField_lugar.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textField_lugar.setEditable(false);
 		this.textField_lugar.setColumns(20);
 		this.textField_lugar.setBackground(Color.WHITE);
@@ -252,6 +260,15 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		
 		this.panel_7 = new JPanel();
 		this.contentPane.add(this.panel_7);
+		this.panel_7.setLayout(null);
+		
+		this.scrollPane = new JScrollPane();
+		this.scrollPane.setBounds(0, 0, 237, 91);
+		this.panel_7.add(this.scrollPane);
+		
+		this.textArea = new JTextArea();
+		this.textArea.setEditable(false);
+		this.scrollPane.setViewportView(this.textArea);
 		
 		this.panel_8 = new JPanel();
 		this.contentPane.add(this.panel_8);
@@ -295,13 +312,27 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 
 	@Override
 	public void nuevoMensaje(String tipo, String hora, String lugar) {
-		this.textField_tipo.setText(tipo);
-		this.textField_hora.setText(hora);
-		this.textField_lugar.setText(lugar);
+		this.textArea.append("Tipo: "+tipo+" desde "+lugar+" a las "+hora+"\n");
+		if (textField_tipo.getText().equals("") || textField_hora.getText().equals("") || textField_lugar.getText().equals(""))
+		{
+			this.textField_tipo.setText(tipo);
+			this.textField_hora.setText(hora);
+			this.textField_lugar.setText(lugar);
+		}
+		
 		AudioClip sonido;
         sonido = java.applet.Applet.newAudioClip(getClass().getResource("/Vistas/sonido.wav"));
         sonido.play();
 	}
+	
+	@Override
+	public void actualizarFields(String tipo, String hora, String lugar) {
+		this.textField_tipo.setText(tipo);
+		this.textField_hora.setText(hora);
+		this.textField_lugar.setText(lugar);
+
+	}
+	
 
 	@Override
 	public boolean getRdbtnMedico() {
@@ -348,4 +379,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 	public void setBtnRecepcion(boolean a) {
 		this.btn_ConfirmarRecepcion.setEnabled(a);
 	}
+
+	
+	
 }

@@ -30,8 +30,9 @@ public class Controlador implements ActionListener, Observer{
 		String accion = e.getActionCommand();
 		
 		if(accion.equals("ConfirmarRecepcion")) {
-			ServidorRecepcion.getInstance().mandarMensaje(accion);
-			//System.out.println("envio");
+			
+			ServidorRecepcion.getInstance().mandarMensaje(accion,ventana);
+			
 		}else if(accion.equals("Escuchar")) {
 			String puerto = this.ventana.getPuerto();
 			if(puerto != null && !puerto.equals("")) {
@@ -53,7 +54,7 @@ public class Controlador implements ActionListener, Observer{
 			if((tipo.equals("Medico") && this.ventana.getRdbtnMedico()) || (tipo.equals("Foco Incendio") && this.ventana.getRdbtnIncendio()) || (tipo.equals("Seguridad") && this.ventana.getRdbtnSeguridad())) {
 				this.ventana.nuevoMensaje(tipo, ServidorRecepcion.getInstance().getHora(), ServidorRecepcion.getInstance().getLugar());
 			}else {
-				ServidorRecepcion.getInstance().mandarMensaje("rechazado");
+				ServidorRecepcion.getInstance().mandarMensaje("rechazado",ventana);
 			}
 		}
 	}
