@@ -39,7 +39,6 @@ import javax.swing.JScrollPane;
 
 public class PanelReceptor extends JFrame implements IVista, KeyListener {
 
-	private static PanelReceptor instance;
 	private JPanel contentPane;
 	private JPanel panel_10;
 	private JPanel panel_11;
