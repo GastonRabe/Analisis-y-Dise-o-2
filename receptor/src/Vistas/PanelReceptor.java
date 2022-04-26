@@ -36,6 +36,7 @@ import java.awt.FlowLayout;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JScrollPane;
+import javax.swing.border.EtchedBorder;
 
 public class PanelReceptor extends JFrame implements IVista, KeyListener {
 
@@ -258,11 +259,11 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.panel_6.add(this.textField_lugar);
 		
 		this.panel_7 = new JPanel();
+		this.panel_7.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Historial de Solicitudes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		this.contentPane.add(this.panel_7);
-		this.panel_7.setLayout(null);
+		this.panel_7.setLayout(new BorderLayout(0, 0));
 		
 		this.scrollPane = new JScrollPane();
-		this.scrollPane.setBounds(0, 0, 237, 91);
 		this.panel_7.add(this.scrollPane);
 		
 		this.textArea = new JTextArea();
