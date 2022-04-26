@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Observable;
 
+import javax.swing.JOptionPane;
+
 import Vistas.IVista;
 import Vistas.PanelReceptor;
 
@@ -81,23 +83,26 @@ public class ServidorRecepcion extends Observable implements Runnable{
 			this.ins.remove(this.ins.size() -1);
 			this.horas.remove(this.ins.size() -1);
 		}else {
-			this.outs.get(0).println(msg);
-			this.outs.remove(0);
-			this.ins.remove(0);
-			this.horas.remove(0);
-			
-			if (outs.size()==0)
-				vent.actualizarFields("","","");
-			else
+			if (outs.size()>0)
 			{
-				Formatter fmtHora = new Formatter();
-                Formatter fmtMins = new Formatter();
-                String mensaje=ins.get(0);
-                String hora=horas.get(0);
-                int aux = mensaje.indexOf('@');
-                vent.actualizarFields(mensaje.substring(0, aux), hora, mensaje.substring(aux+1, mensaje.length()));
-			}
+				this.outs.get(0).println(msg);
+				this.outs.remove(0);
+				this.ins.remove(0);
+				this.horas.remove(0);
+				
+				if (outs.size()==0)
+					vent.actualizarFields("","","");
+				else
+				{
+					Formatter fmtHora = new Formatter();
+	                Formatter fmtMins = new Formatter();
+	                String mensaje=ins.get(0);
+	                String hora=horas.get(0);
+	                int aux = mensaje.indexOf('@');
+	                vent.actualizarFields(mensaje.substring(0, aux), hora, mensaje.substring(aux+1, mensaje.length()));
+				}
             
+			} else JOptionPane.showMessageDialog(null, "No tiene notificaciones para confirmar");
             
 			
 			
