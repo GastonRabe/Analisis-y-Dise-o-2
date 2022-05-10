@@ -1,6 +1,6 @@
 Manual de instalación, configuración y operación
 
-1- Verificar tener instalado Java en su computadora, con una versión de Jdk 15 o 16. 
+1- Verificar tener instalado Java en su computadora, con una versión de Jdk 16. 
 
 2- Una vez descargados los .jar, abrir primero el receptor y configurar el puerto en el que se va a estar escuchando al/los emisores y apretar el botón “escuchar”. 
 
