@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Observable;
 
+
 public class ConectaServidor extends Observable implements Runnable {
 
 	private PrintWriter out;
