@@ -124,11 +124,11 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 	/**
 	 * Create the frame.
 	 */
-	public PanelReceptor() {
+	public PanelReceptor(int x, int y) {
 		setTitle("Receptor");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(650, 200, 500, 600);
+		setBounds(x, y, 500, 600);
 		setResizable(false);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -295,6 +295,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.setAlwaysOnTop(true);
 		this.setVisible(true);
 	}
 
@@ -382,6 +383,36 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 
 	public void setBtnEscuchar(boolean a) {
 		this.btn_escuchar.setEnabled(a);
+	}
+
+	@Override
+	public String getIpServidor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPuertoServidor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void visible(boolean a) {
+		// TODO Auto-generated method stub
+		this.setVisible(a);
+	}
+
+	@Override
+	public int posicionX() {
+		// TODO Auto-generated method stub
+		return this.getX();
+	}
+
+	@Override
+	public int posicionY() {
+		// TODO Auto-generated method stub
+		return this.getY();
 	}
 	
 }

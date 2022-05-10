@@ -13,6 +13,11 @@ public interface IVista {
 	boolean getRdbtnIncendio();
 	boolean getRdbtnSeguridad();
 	String getPuerto();
+	String getIpServidor();
+	String getPuertoServidor();
 	void setBtnRecepcion(boolean a);
 	void setBtnEscuchar(boolean a);
+	void visible(boolean a);
+	int posicionX();
+	int posicionY();
 }
