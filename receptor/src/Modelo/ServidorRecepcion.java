@@ -62,8 +62,10 @@ public class ServidorRecepcion extends Observable implements Runnable{
                 Formatter fmtMins = new Formatter();
                 int aux = msg.indexOf('@');
                 this.tipo = msg.substring(0, aux);
-                this.lugar = msg.substring(aux+1, msg.length());
-                this.hora = fmtHora.format("%02d",LocalDateTime.now().getHour()) + ":" +fmtMins.format("%02d",LocalDateTime.now().getMinute());
+                msg = msg.substring(aux+1, msg.length());
+                this.lugar = msg.substring(0, msg.indexOf('@'));
+                
+                this.hora = msg.substring(msg.indexOf('@')+1, msg.length());
                 this.horas.add(hora);
                 this.setChanged();
         		this.notifyObservers();

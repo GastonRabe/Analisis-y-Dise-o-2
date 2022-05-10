@@ -54,7 +54,9 @@ public class Controlador implements ActionListener, Observer{
 				out.println(mensaje);
 				s.close();
 				this.ventanaConfig.visible(false);
-				this.ventana = new PanelReceptor(ventanaConfig.posicionX(), ventanaConfig.posicionY()); this.ventana.setActionListener(this);
+				this.ventana = new PanelReceptor(ventanaConfig.posicionX(), ventanaConfig.posicionY(),this.ventanaConfig.getRdbtnMedico(),
+						this.ventanaConfig.getRdbtnIncendio(), this.ventanaConfig.getRdbtnSeguridad(), puerto);
+				this.ventana.setActionListener(this);
 				ServidorRecepcion.getInstance().setPuerto(Integer.parseInt(puerto));
 				this.hilo = new Thread(ServidorRecepcion.getInstance());
 				this.hilo.start();

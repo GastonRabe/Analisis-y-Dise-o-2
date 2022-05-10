@@ -3,6 +3,8 @@ package Controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Formatter;
+import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -40,7 +42,10 @@ public class Controlador implements ActionListener, Observer{
 			}else if(puesto == null || puesto.equals("") || puesto.trim().length() == 0) {
 				this.vista.showMensaje("Ingrese un puesto");
 			}else {
-				String mensaje = "emisor@" + accion + "@" + puesto;
+				Formatter fmtHora = new Formatter();
+				Formatter fmtMins = new Formatter();
+				String mensaje = "emisor@" + accion + "@" + puesto + "@"+ 
+						fmtHora.format("%02d",LocalDateTime.now().getHour()) + ":" +fmtMins.format("%02d",LocalDateTime.now().getMinute());;
 				servicio = new ConectaServidor(ip, Integer.parseInt(puerto), mensaje);
 				
 				//this.vista.visible(false);
@@ -71,8 +76,10 @@ public class Controlador implements ActionListener, Observer{
 			while(i<this.panel.size() && !this.panel.get(i).getPuerto().equals(puerto)) {
 				i++;
 			}
-			this.panel.get(i).showMensaje("Recibido");
-			this.panel.remove(i);
+			if(i < this.panel.size()) {
+				this.panel.get(i).showMensaje("Recibido");
+				this.panel.remove(i);
+			}
 		}
 		
 		

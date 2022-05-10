@@ -68,7 +68,6 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 	private JLabel lblNewLabel_4;
 	private JTextField textFieldPuerto;
 	private JTextField textFieldIP;
-	private JButton btn_escuchar;
 	private JTextArea textArea;
 	private JScrollPane scrollPane;
 
@@ -124,7 +123,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 	/**
 	 * Create the frame.
 	 */
-	public PanelReceptor(int x, int y) {
+	public PanelReceptor(int x, int y, boolean medico, boolean incendio, boolean seguridad, String puerto) {
 		setTitle("Receptor");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -154,11 +153,13 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.panel_11.setLayout(null);
 		
 		this.textFieldPuerto = new JTextField();
+		this.textFieldPuerto.setEditable(false);
 		this.textFieldPuerto.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textFieldPuerto.addKeyListener(this);
 		this.textFieldPuerto.setBounds(35, 40, 163, 20);
 		this.panel_11.add(this.textFieldPuerto);
 		this.textFieldPuerto.setColumns(10);
+		this.textFieldPuerto.setText(puerto);
 		
 		this.textFieldIP = new JTextField();
 		this.textFieldIP.setHorizontalAlignment(SwingConstants.CENTER);
@@ -181,14 +182,17 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.panel_2.setLayout(null);
 		
 		this.rdbtnAsistenciaMedica = new JRadioButton("Asistencia Medica");
+		this.rdbtnAsistenciaMedica.setEnabled(false);
 		this.rdbtnAsistenciaMedica.setBounds(34, 0, 237, 30);
 		this.panel_2.add(this.rdbtnAsistenciaMedica);
 		
 		this.rdbtnSeguridad = new JRadioButton("Personal de seguridad");
+		this.rdbtnSeguridad.setEnabled(false);
 		this.rdbtnSeguridad.setBounds(34, 29, 237, 30);
 		this.panel_2.add(this.rdbtnSeguridad);
 		
 		this.rdbtnIncendio = new JRadioButton("Foco de incendio");
+		this.rdbtnIncendio.setEnabled(false);
 		this.rdbtnIncendio.setBounds(34, 60, 237, 30);
 		this.panel_2.add(this.rdbtnIncendio);
 		
@@ -286,15 +290,13 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		
 		try {
 			this.textFieldIP.setText(InetAddress.getLocalHost().getHostAddress());
-			
-			btn_escuchar = new JButton("Escuchar");
-			this.btn_escuchar.setBackground(SystemColor.inactiveCaption);
-			btn_escuchar.setBounds(70, 65, 105, 21);
-			this.panel_11.add(btn_escuchar);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.rdbtnAsistenciaMedica.setSelected(medico);
+		this.rdbtnIncendio.setSelected(incendio);
+		this.rdbtnSeguridad.setSelected(seguridad);
 		this.setAlwaysOnTop(true);
 		this.setVisible(true);
 	}
@@ -308,7 +310,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 	public void setActionListener(ActionListener a) {
 		// TODO Auto-generated method stub
 		this.btn_ConfirmarRecepcion.addActionListener(a);
-		this.btn_escuchar.addActionListener(a);
+		
 	}
 
 	@Override
@@ -382,7 +384,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 	}
 
 	public void setBtnEscuchar(boolean a) {
-		this.btn_escuchar.setEnabled(a);
+		
 	}
 
 	@Override
