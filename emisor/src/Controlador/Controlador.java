@@ -40,7 +40,7 @@ public class Controlador implements ActionListener, Observer{
 			}else if(puesto == null || puesto.equals("") || puesto.trim().length() == 0) {
 				this.vista.showMensaje("Ingrese un puesto");
 			}else {
-				String mensaje = accion + "@" + puesto;
+				String mensaje = "emisor@" + accion + "@" + puesto;
 				servicio = new ConectaServidor(ip, Integer.parseInt(puerto), mensaje);
 				
 				//this.vista.visible(false);
