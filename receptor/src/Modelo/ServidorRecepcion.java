@@ -21,20 +21,21 @@ public class ServidorRecepcion extends Observable implements Runnable{
 
 	
 	private ServerSocket ss;
-	private Socket s;
 	private PrintWriter out;
 	private BufferedReader in;
 	private static ServidorRecepcion instance =null;
-	private String tipo, hora, lugar;
+	private String tipo, hora, lugar, id;
 	private int puerto;
 	private ArrayList<PrintWriter> outs;
 	private ArrayList<String> ins;
 	private ArrayList<String> horas;
+	private ArrayList<String> ids;
 	
 	private ServidorRecepcion () {
 		this.outs = new ArrayList<PrintWriter>();
 		this.ins = new ArrayList<String>();
 		this.horas = new ArrayList<String>();
+		this.ids = new ArrayList<String>();
 	}
 	
 	public static ServidorRecepcion getInstance() {
@@ -55,20 +56,26 @@ public class ServidorRecepcion extends Observable implements Runnable{
                 Socket soc = this.ss.accept();
                 this.out = new PrintWriter(soc.getOutputStream(), true);
                 this.in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
-                this.outs.add(out);
                 String msg = this.in.readLine();
-                this.ins.add(msg);
+                
                 Formatter fmtHora = new Formatter();
                 Formatter fmtMins = new Formatter();
                 int aux = msg.indexOf('@');
                 this.tipo = msg.substring(0, aux);
-                msg = msg.substring(aux+1, msg.length());
-                this.lugar = msg.substring(0, msg.indexOf('@'));
-                
-                this.hora = msg.substring(msg.indexOf('@')+1, msg.length());
-                this.horas.add(hora);
+                if(!tipo.equals("RecepcionConfirmada")) {
+                	this.ins.add(msg);
+	                msg = msg.substring(aux+1, msg.length());
+	                this.lugar = msg.substring(0, msg.indexOf('@'));
+	                msg = msg.substring(msg.indexOf('@')+1, msg.length());
+	                this.hora = msg.substring(0,msg.indexOf('@'));
+	                this.outs.add(out);
+	                
+	                this.id = msg.substring(msg.indexOf('@')+1, msg.length());
+	                this.ids.add(this.id);
+	                this.horas.add(hora);
+                }
                 this.setChanged();
-        		this.notifyObservers();
+        		this.notifyObservers(msg);
                
             }
 
@@ -87,11 +94,11 @@ public class ServidorRecepcion extends Observable implements Runnable{
 		}else {
 			if (outs.size()>0)
 			{
-				this.outs.get(0).println(msg);
+				this.outs.get(0).println(msg+"@"+this.ids.get(0));
 				this.outs.remove(0);
 				this.ins.remove(0);
 				this.horas.remove(0);
-				
+				this.ids.remove(0);
 				if (outs.size()==0)
 					vent.actualizarFields("","","");
 				else
@@ -101,15 +108,55 @@ public class ServidorRecepcion extends Observable implements Runnable{
 	                String mensaje=ins.get(0);
 	                String hora=horas.get(0);
 	                int aux = mensaje.indexOf('@');
-	                vent.actualizarFields(mensaje.substring(0, aux), hora, mensaje.substring(aux+1, mensaje.length()));
+	                String tipo = mensaje.substring(0, aux);
+	                mensaje = mensaje.substring(aux+1, mensaje.length());
+	                vent.actualizarFields(tipo, hora, mensaje.substring(0, mensaje.indexOf('@')));
 				}
             
-			} else JOptionPane.showMessageDialog(null, "No tiene notificaciones para confirmar");
+			} 
             
 			
 			
 		}
 		
+	}
+	
+	public void eliminarConexion(String id, IVista vent) {
+		int i=0;
+		while(i<this.ids.size() && !this.ids.get(i).equals(id)) {
+			i++;
+		}
+		if(i<this.ids.size() && i==0) {
+			this.outs.get(0).println("cerrado");
+			this.outs.remove(0);
+			this.ins.remove(0);
+			this.horas.remove(0);
+			this.ids.remove(0);
+			if (outs.size()==0) {
+				vent.actualizarFields("","","");
+			}
+			else
+			{
+				Formatter fmtHora = new Formatter();
+                Formatter fmtMins = new Formatter();
+                String mensaje=ins.get(0);
+                String hora=horas.get(0);
+                int aux = mensaje.indexOf('@');
+                String tipo = mensaje.substring(0, aux);
+                mensaje = mensaje.substring(aux+1, mensaje.length());
+                vent.actualizarFields(tipo, hora, mensaje.substring(0, mensaje.indexOf('@')));
+			}
+		}else if(i<this.ids.size()) {
+			this.outs.get(i).println("cerrado");
+			this.ids.remove(i);
+			this.horas.remove(i);
+			this.ins.remove(i);
+			this.outs.remove(i);
+		}
+	}
+	
+	public String getId() {
+		return this.id;
 	}
 	
 	public String getTipo() {

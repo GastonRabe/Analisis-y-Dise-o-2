@@ -60,22 +60,12 @@ public class Controlador implements ActionListener, Observer{
 				ServidorRecepcion.getInstance().setPuerto(Integer.parseInt(puerto));
 				this.hilo = new Thread(ServidorRecepcion.getInstance());
 				this.hilo.start();
-				this.ventana.setBtnRecepcion(true);
+				this.ventana.setBtnRecepcion(false);
 				this.ventana.setBtnEscuchar(false);
 			} catch (NumberFormatException | IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			/*String puerto = this.ventana.getPuerto();
-			if(puerto != null && !puerto.equals("")) {
-				int puer = Integer.parseInt(puerto);
-				ServidorRecepcion.getInstance().setPuerto(puer);
-				this.hilo = new Thread(ServidorRecepcion.getInstance());
-				this.hilo.start();
-				this.ventana.setBtnRecepcion(true);
-				this.ventana.setBtnEscuchar(false);
-			}
-			else  JOptionPane.showMessageDialog(null,"Debe ingresar un puerto");*/
 		}
 	}
 
@@ -85,8 +75,12 @@ public class Controlador implements ActionListener, Observer{
 		String mensaje = (String) arg;
 		if(o.equals(ServidorRecepcion.getInstance())) {
 			String tipo = ServidorRecepcion.getInstance().getTipo();
-			if((tipo.equals("Medico") && this.ventana.getRdbtnMedico()) || (tipo.equals("Foco Incendio") && this.ventana.getRdbtnIncendio()) || (tipo.equals("Seguridad") && this.ventana.getRdbtnSeguridad())) {
+			if(tipo.equals("RecepcionConfirmada")) {
+				String aux = mensaje.substring(mensaje.indexOf('@')+1, mensaje.length());
+				ServidorRecepcion.getInstance().eliminarConexion(aux, ventana);
+			}else if((tipo.equals("Medico") && this.ventana.getRdbtnMedico()) || (tipo.equals("Foco Incendio") && this.ventana.getRdbtnIncendio()) || (tipo.equals("Seguridad") && this.ventana.getRdbtnSeguridad())) {
 				this.ventana.nuevoMensaje(tipo, ServidorRecepcion.getInstance().getHora(), ServidorRecepcion.getInstance().getLugar());
+				this.ventana.setBtnRecepcion(true);
 			}else {
 				ServidorRecepcion.getInstance().mandarMensaje("rechazado",ventana);
 			}

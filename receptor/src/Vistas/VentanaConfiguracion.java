@@ -44,6 +44,7 @@ public class VentanaConfiguracion extends JFrame implements IVista{
 	 * Create the frame.
 	 */
 	public VentanaConfiguracion() {
+		setTitle("Configuracion Receptor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setResizable(false);

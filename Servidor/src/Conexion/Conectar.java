@@ -16,14 +16,12 @@ public class Conectar extends Observable implements Runnable{
 	private Socket s;
 	private PrintWriter out;
 	private BufferedReader in;
-	private String tipo, hora, lugar;
-	private int puerto=1234; 
-	private ArrayList<PrintWriter> outs;
-	private ArrayList<BufferedReader> insReceptor;
-	private ArrayList<String> ins;
-	private ArrayList<String> horas;
+	private int puerto; 
+
 	
-	
+	public Conectar(int puerto) {
+		this.puerto = puerto;
+	}
 	
 	
 	@Override
@@ -32,16 +30,10 @@ public class Conectar extends Observable implements Runnable{
 			ss = new ServerSocket(puerto);
 			
 			while(true) {
-				System.out.println("ESPERANDO el socket");
-				Socket soc = this.ss.accept();
-				System.out.println("acepte el socket");
-                this.out = new PrintWriter(soc.getOutputStream(), true);
-                System.out.println("aaa");
-                this.in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
-                //this.outs.add(out);
-                System.out.println("antes de leer");
+				this.s = this.ss.accept();
+                this.out = new PrintWriter(s.getOutputStream(), true);
+                this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
                 String msg = this.in.readLine();
-                System.out.println("DESPUES de leer");
                 this.setChanged();
                 this.notifyObservers(msg);
                 
@@ -49,12 +41,22 @@ public class Conectar extends Observable implements Runnable{
 		}catch (Exception e) {
 			
 		}
-		
 	}
 	
 	public void mandarMensajeReceptor(String msg) {
 		this.out.println(msg);
 	}
 
+	public String getIp() {
+		
+		return this.s.getInetAddress().getHostName();
+	}
 	
+	public int getPuerto() {
+		return this.puerto;
+	}
+	
+	public PrintWriter getOut() {
+		return this.out;
+	}
 }

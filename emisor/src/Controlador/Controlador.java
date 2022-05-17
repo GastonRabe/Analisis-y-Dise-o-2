@@ -44,20 +44,18 @@ public class Controlador implements ActionListener, Observer{
 			}else {
 				Formatter fmtHora = new Formatter();
 				Formatter fmtMins = new Formatter();
-				String mensaje = "emisor@" + accion + "@" + puesto + "@"+ 
-						fmtHora.format("%02d",LocalDateTime.now().getHour()) + ":" +fmtMins.format("%02d",LocalDateTime.now().getMinute());;
+				Formatter fmtDia = new Formatter();
+				Formatter fmtMes = new Formatter();
+				Formatter fmtAno = new Formatter();
+				String fecha = ""+fmtDia.format("%02d",LocalDateTime.now().getDayOfMonth())+"/"+fmtMes.format("%02d",LocalDateTime.now().getMonthValue())+"/"+
+						fmtAno.format("%04d",LocalDateTime.now().getYear())+" - "+ fmtHora.format("%02d",LocalDateTime.now().getHour()) + ":" +fmtMins.format("%02d",LocalDateTime.now().getMinute());
+				String mensaje = "emisor@" + accion + "@" + puesto + "@"+ fecha;
 				servicio = new ConectaServidor(ip, Integer.parseInt(puerto), mensaje);
-				
-				//this.vista.visible(false);
 				this.panel.add(new PanelAvisoRecepcion(accion, puesto, puerto));
 				
 				this.servidor  = new Thread(servicio);
 				servicio.addObserver(this);
 				this.servidor.start();
-				/*while(this.panel.isVisible()) {
-					
-				}
-				this.vista.visible(true);*/
 			}
 		}
 		
