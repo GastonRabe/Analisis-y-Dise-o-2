@@ -145,7 +145,8 @@ public class VentanaConfiguracion extends JFrame implements IVista{
 		this.rdbtnIncendio.setBounds(34, 60, 237, 30);
 		this.panel_3.add(this.rdbtnIncendio);
 		
-		this.btn_escuchar = new JButton("Escuchar");
+		this.btn_escuchar = new JButton("Conectar");
+		this.btn_escuchar.setActionCommand("Escuchar");
 		this.btn_escuchar.setBounds(44, 96, 105, 21);
 		this.panel_3.add(this.btn_escuchar);
 		this.btn_escuchar.setBackground(SystemColor.inactiveCaption);
