@@ -136,7 +136,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		
 		this.rdbtnAsistenciaMedica = new JRadioButton("Asistencia Medica");
 		this.rdbtnAsistenciaMedica.setEnabled(false);
-		this.rdbtnAsistenciaMedica.setBounds(34, 11, 237, 30);
+		this.rdbtnAsistenciaMedica.setBounds(34, 15, 237, 26);
 		this.panel_2.add(this.rdbtnAsistenciaMedica);
 		
 		this.rdbtnSeguridad = new JRadioButton("Personal de seguridad");
@@ -146,7 +146,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		
 		this.rdbtnIncendio = new JRadioButton("Foco de incendio");
 		this.rdbtnIncendio.setEnabled(false);
-		this.rdbtnIncendio.setBounds(34, 58, 237, 30);
+		this.rdbtnIncendio.setBounds(34, 60, 237, 26);
 		this.panel_2.add(this.rdbtnIncendio);
 		this.rdbtnAsistenciaMedica.setSelected(medico);
 		this.rdbtnIncendio.setSelected(incendio);
