@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.EventListener;
 import java.util.Observable;
 import java.util.Observer;
@@ -48,7 +50,13 @@ public class Controlador implements ActionListener, Observer{
 				String medico = this.ventanaConfig.getRdbtnMedico()? "true":"false";
 				String seguridad = this.ventanaConfig.getRdbtnSeguridad()? "true":"false";
 				String incendio = this.ventanaConfig.getRdbtnIncendio()? "true":"false";
-				String ip = "localhost";
+				String ip="";
+				try {
+					ip = InetAddress.getLocalHost().getHostAddress();
+				} catch (UnknownHostException x) {
+					// TODO Auto-generated catch block
+					x.printStackTrace();
+				}
 				String puerto = this.ventanaConfig.getPuerto();
 				String mensaje = "receptor@"+medico+"@"+seguridad+"@"+incendio+"@"+ip+"@"+puerto;
 				out.println(mensaje);
