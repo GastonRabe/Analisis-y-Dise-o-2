@@ -17,6 +17,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JRadioButton;
 import java.awt.GridLayout;
 import java.awt.event.KeyListener;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.awt.event.KeyEvent;
 
 public class VentanaConfiguracion extends JFrame implements IVista{
@@ -92,12 +94,17 @@ public class VentanaConfiguracion extends JFrame implements IVista{
 		this.panel_1.add(this.textField_puerto);
 		
 		this.textField_1 = new JTextField();
-		this.textField_1.setText("192.168.0.207");
 		this.textField_1.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textField_1.setEditable(false);
 		this.textField_1.setColumns(10);
 		this.textField_1.setBounds(35, 10, 163, 20);
 		this.panel_1.add(this.textField_1);
+		try {
+			this.textField_1.setText(InetAddress.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		this.textField_IpServidor = new JTextField();
 		this.textField_IpServidor.setHorizontalAlignment(SwingConstants.CENTER);
