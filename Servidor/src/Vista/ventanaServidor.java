@@ -43,7 +43,7 @@ public class ventanaServidor extends JFrame implements IVista, KeyListener {
 	public ventanaServidor() {
 		setTitle("Servidor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 610, 300);
+		setBounds(100, 100, 640, 300);
 		setResizable(false);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
