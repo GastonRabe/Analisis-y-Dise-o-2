@@ -6,46 +6,27 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Observable;
 
-import Modelo.Receptor;
-
-public class Conectar extends Observable implements Runnable{
+public class ConectarPrimario extends Observable implements Runnable{
 
 	private ServerSocket ss;
 	private Socket s;
 	private PrintWriter out;
 	private BufferedReader in;
-	private int puerto, puertoMonitor; 
-	private String ipMonitor;
+	private int puerto;
 
 	
-	public Conectar(int puerto, String ipMonitor, int puertoMonitor) {
+	public ConectarPrimario(int puerto) {
 		this.puerto = puerto;
-		this.ipMonitor = ipMonitor;
-		this.puertoMonitor = puertoMonitor;
 	}
 	
 	
 	@Override
 	public void run() {
 		try {
-			boolean bool = true;
-			this.s = new Socket(this.ipMonitor, this.puertoMonitor);
-			this.out = new PrintWriter(s.getOutputStream(), true);
-            this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            while (bool) {
-                this.out.println("nuevo@localhost@"+this.puerto);
-                String msg = this.in.readLine();
-                this.setChanged();
-                this.notifyObservers(msg);
-
-               bool = false;
-                 this.s.close();
-                // jTextArea1.setText("");
-            }
-			ss = new ServerSocket(puerto);
+			
+			this.ss = new ServerSocket(puerto);
 			
 			
 			while(true) {

@@ -20,6 +20,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class ventanaServidor extends JFrame implements IVista, KeyListener {
 
@@ -34,6 +36,12 @@ public class ventanaServidor extends JFrame implements IVista, KeyListener {
 	private JPanel panel_4;
 	private JScrollPane scrollPane;
 	private JTextArea textArea;
+	private JPanel panel_5;
+	private JPanel panel_6;
+	private JPanel panel_7;
+	private JTextField textField_ipMonitor;
+	private JTextField textField_puertoMonitor;
+	private JTextField txt_status;
 
 
 
@@ -43,7 +51,7 @@ public class ventanaServidor extends JFrame implements IVista, KeyListener {
 	public ventanaServidor() {
 		setTitle("Servidor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 640, 300);
+		setBounds(100, 100, 610, 300);
 		setResizable(false);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -52,7 +60,7 @@ public class ventanaServidor extends JFrame implements IVista, KeyListener {
 		
 		this.panel = new JPanel();
 		this.contentPane.add(this.panel, BorderLayout.NORTH);
-		this.panel.setLayout(new GridLayout(0, 3, 0, 0));
+		this.panel.setLayout(new GridLayout(2, 3, 0, 0));
 		
 		this.panel_3 = new JPanel();
 		this.panel_3.setBorder(new TitledBorder(null, "IP:", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
@@ -93,6 +101,32 @@ public class ventanaServidor extends JFrame implements IVista, KeyListener {
 		this.scrollPane.setViewportView(this.textArea);
 		try {
 			this.textField_ip.setText(InetAddress.getLocalHost().getHostAddress());
+			
+			this.panel_5 = new JPanel();
+			this.panel_5.setBorder(new TitledBorder(null, "Ip Monitor:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			this.panel.add(this.panel_5);
+			
+			this.textField_ipMonitor = new JTextField();
+			this.panel_5.add(this.textField_ipMonitor);
+			this.textField_ipMonitor.setColumns(10);
+			
+			this.panel_6 = new JPanel();
+			this.panel_6.setBorder(new TitledBorder(null, "Puerto Monitor:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			this.panel.add(this.panel_6);
+			
+			this.textField_puertoMonitor = new JTextField();
+			this.panel_6.add(this.textField_puertoMonitor);
+			this.textField_puertoMonitor.setColumns(10);
+			
+			this.txt_status = new JTextField();
+			this.txt_status.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			this.txt_status.setHorizontalAlignment(SwingConstants.CENTER);
+			this.txt_status.setEditable(false);
+			this.panel.add(this.txt_status);
+			this.txt_status.setColumns(10);
+			
+			this.panel_7 = new JPanel();
+			this.contentPane.add(this.panel_7, BorderLayout.SOUTH);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -132,6 +166,8 @@ public class ventanaServidor extends JFrame implements IVista, KeyListener {
 	public void setEnableButton(boolean b) {
 		this.btn_escuchar.setEnabled(b);
 		this.textField_puerto.setEditable(false);
+		this.textField_ipMonitor.setEditable(b);
+		this.textField_puertoMonitor.setEditable(b);
 	}
 	public void keyPressed(KeyEvent e) {
 	}
@@ -150,5 +186,37 @@ public class ventanaServidor extends JFrame implements IVista, KeyListener {
         if (textField_puerto.getText().trim().length() == 4) {
             e.consume();
         }
+	}
+
+
+
+	@Override
+	public String getIpMonitor() {
+		// TODO Auto-generated method stub
+		return this.textField_ipMonitor.getText();
+	}
+
+
+
+	@Override
+	public int getPuertoMonitor() {
+		// TODO Auto-generated method stub
+		return Integer.parseInt(this.textField_puertoMonitor.getText());
+	}
+
+
+
+	@Override
+	public void setStatus(String status) {
+		// TODO Auto-generated method stub
+		this.txt_status.setText(status);
+	}
+
+
+
+	@Override
+	public void setPuerto(String puerto) {
+		// TODO Auto-generated method stub
+		this.textField_puerto.setText(puerto);
 	}
 }

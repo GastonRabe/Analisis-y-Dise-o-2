@@ -10,6 +10,7 @@ import java.util.Observer;
 
 import Conexion.ConectaReceptor;
 import Conexion.Conectar;
+import Conexion.ConectarPrimario;
 import Modelo.Receptor;
 import Modelo.Solicitud;
 import Vista.IVista;
@@ -18,11 +19,13 @@ import Vista.ventanaServidor;
 public class Controlador implements Observer, ActionListener{
 	
 	private Conectar conexion;
-	private ConectaReceptor cp;
+	private ConectaReceptor conectaReceptor;
+	private ConectarPrimario conectarPrimario;
 	private ArrayList<Receptor> receptores;
 	private Thread t;
 	private IVista ventana;
 	private ArrayList<Solicitud> solicitudes;
+	private boolean primario = false;
 	
 
 	public Controlador() {
@@ -47,79 +50,98 @@ public class Controlador implements Observer, ActionListener{
 				fmtAno.format("%04d",LocalDateTime.now().getYear())+" - "+ fmtHora.format("%02d",LocalDateTime.now().getHour()) + ":" +fmtMins.format("%02d",LocalDateTime.now().getMinute());
 		
 		String mensaje = (String) arg;
-		int aux = mensaje.indexOf('@');
-		String app =  mensaje.substring(0, aux);
-		String mens=mensaje.substring((mensaje.indexOf('@')+1), mensaje.length());
-		String tipo= mens.substring(0, mens.indexOf('@'));
-		if(app.equals("emisor")) {
-			//mensaje: emisor@tipoSolicitud@lugar@hora
-			mensaje = mens;
-			mens = mens.substring((mens.indexOf('@')+1), mens.length());
-			String lugar = mens.substring(0, mens.indexOf('@'));
-			String hora = mens.substring((mens.indexOf('@')+1), mens.length());
-			
-			int i;
-			boolean aceptaReceptor;
-			boolean hayReceptores = false;
-			Solicitud solicitud = new Solicitud(this.conexion.getOut());
-			this.ventana.nuevoMensaje(hora + "\t"+ "Solicitud "+ solicitud.getId()+": "+tipo +" en " + lugar+"             \t" + this.conexion.getIp() + "\t"+ this.conexion.getPuerto());
-			this.solicitudes.add(solicitud);
-			this.ventana.nuevoMensaje(hora+ "\t"+ "Enviando solicitud a:\t\t");
-			for(i=0; i<this.receptores.size(); i++) {
-				aceptaReceptor = false;
-				
-				if(tipo.equals("Foco Incendio") && this.receptores.get(i).isFocoIncendio()) {
-					aceptaReceptor= true;
-				}else if(tipo.equals("Seguridad") && this.receptores.get(i).isSeguridad()) {
-					aceptaReceptor= true;
-				}else if(tipo.equals("Medico") && this.receptores.get(i).isAsistenciaMedica()){
-					aceptaReceptor= true;
-				}
-				if(aceptaReceptor) {
-					this.cp = new ConectaReceptor(this.receptores.get(i).getIp(), this.receptores.get(i).getPuerto(), mensaje+"@"+solicitud.getId());
-					Thread t = new Thread(this.cp);
-					this.cp.addObserver(this);
-					t.start();
-					solicitud.addReceptor(this.receptores.get(i));
-					this.ventana.nuevoMensaje("\t\t\t\t\t"+ this.receptores.get(i).getIp()+ "\t"+ this.receptores.get(i).getPuerto());
-					hayReceptores = true;
-				}
-			}
-			if(!hayReceptores) {
-				this.ventana.nuevoMensaje("RECHAZADO: no hay receptores que atiendan solicitud: "+ tipo);
-				solicitud.confirmarRecepcion(false);
-			}
+		if(mensaje.equals("Secundario")) {
+			this.primario = false;
+			this.ventana.setStatus("Secundario");
 		}else {
-			if(tipo.equals("ConfirmarRecepcion")) {
-				//CONFIRMACION DE RECEPCION
+			int aux = mensaje.indexOf('@');
+			String app =  mensaje.substring(0, aux);
+			if(app.equals("Primario")) {
+				this.ventana.setStatus("Primario");
 				
-				String id = mens.substring((mens.indexOf('@')+1), mens.length());
-				int idSol = Integer.parseInt(id);
-				int i=0;
-				while(i<this.solicitudes.size() && idSol != this.solicitudes.get(i).getId()) {
-					i++;
-				}
-				this.ventana.nuevoMensaje(fecha+ "\tSolicitud "+ this.solicitudes.get(i).getId()+" confirmada");
-				this.solicitudes.get(i).confirmarRecepcion(true);
-				
+				this.primario = true;
+				String puerto = mensaje.substring((mensaje.indexOf('@')+1), mensaje.length());
+				this.ventana.setPuerto(puerto);
+				this.conexion.cerrarSocket();
+				this.t.stop();
+				this.conectarPrimario = new ConectarPrimario(Integer.parseInt(puerto));
+				this.conectarPrimario.addObserver(this);
+				Thread y = new Thread(this.conectarPrimario);
+				y.start();
 			}else {
-				//mensaje: receptor@medico@seguridad@incendio@ip@puerto
-				mens = mens.substring((mens.indexOf('@')+1), mens.length());
-				String seguridad = mens.substring(0, (mens.indexOf('@')));
-				mens = mens.substring((mens.indexOf('@')+1), mens.length());
-				String incendio = mens.substring(0, (mens.indexOf('@')));
-				mens = mens.substring((mens.indexOf('@')+1), mens.length());
-				String ip = mens.substring(0, (mens.indexOf('@')));
-				mens = mens.substring((mens.indexOf('@')+1), mens.length());
-				String puerto = mens;
-				boolean medico = tipo.equals("true")? true : false;
-				boolean inc = incendio.equals("true")? true : false;
-				boolean seg = seguridad.equals("true")? true : false;
-				int p = Integer.parseInt(puerto);
-				Receptor receptor = new Receptor(inc, medico, seg, p, ip);
-				this.receptores.add(receptor);
-				String nuevoMens = fecha + "\t"+ "Registro Receptor"+ "\t\t" + ip + "\t"+ puerto;
-				this.ventana.nuevoMensaje(nuevoMens);
+				String mens=mensaje.substring((mensaje.indexOf('@')+1), mensaje.length());
+				String tipo= mens.substring(0, mens.indexOf('@'));
+				if(app.equals("emisor") && this.primario == true) {
+					//mensaje: emisor@tipoSolicitud@lugar@hora
+					mensaje = mens;
+					mens = mens.substring((mens.indexOf('@')+1), mens.length());
+					String lugar = mens.substring(0, mens.indexOf('@'));
+					String hora = mens.substring((mens.indexOf('@')+1), mens.length());
+					
+					int i;
+					boolean aceptaReceptor;
+					boolean hayReceptores = false;
+					Solicitud solicitud = new Solicitud(this.conectarPrimario.getOut());
+					this.ventana.nuevoMensaje(hora + "\t"+ "Solicitud "+ solicitud.getId()+": "+tipo +" en " + lugar+"             \t" + this.conectarPrimario.getIp() + "\t"+ this.conectarPrimario.getPuerto());
+					this.solicitudes.add(solicitud);
+					this.ventana.nuevoMensaje(hora+ "\t"+ "Enviando solicitud a:\t\t");
+					for(i=0; i<this.receptores.size(); i++) {
+						aceptaReceptor = false;
+						
+						if(tipo.equals("Foco Incendio") && this.receptores.get(i).isFocoIncendio()) {
+							aceptaReceptor= true;
+						}else if(tipo.equals("Seguridad") && this.receptores.get(i).isSeguridad()) {
+							aceptaReceptor= true;
+						}else if(tipo.equals("Medico") && this.receptores.get(i).isAsistenciaMedica()){
+							aceptaReceptor= true;
+						}
+						if(aceptaReceptor) {
+							this.conectaReceptor = new ConectaReceptor(this.receptores.get(i).getIp(), this.receptores.get(i).getPuerto(), mensaje+"@"+solicitud.getId());
+							Thread t = new Thread(this.conectaReceptor);
+							this.conectaReceptor.addObserver(this);
+							t.start();
+							solicitud.addReceptor(this.receptores.get(i));
+							this.ventana.nuevoMensaje("\t\t\t\t\t"+ this.receptores.get(i).getIp()+ "\t"+ this.receptores.get(i).getPuerto());
+							hayReceptores = true;
+						}
+					}
+					if(!hayReceptores) {
+						this.ventana.nuevoMensaje("RECHAZADO: no hay receptores que atiendan solicitud: "+ tipo);
+						solicitud.confirmarRecepcion(false);
+					}
+				}else {
+					if(tipo.equals("ConfirmarRecepcion") && this.primario == true) {
+						//CONFIRMACION DE RECEPCION
+						
+						String id = mens.substring((mens.indexOf('@')+1), mens.length());
+						int idSol = Integer.parseInt(id);
+						int i=0;
+						while(i<this.solicitudes.size() && idSol != this.solicitudes.get(i).getId()) {
+							i++;
+						}
+						this.ventana.nuevoMensaje(fecha+ "\tSolicitud "+ this.solicitudes.get(i).getId()+" confirmada");
+						this.solicitudes.get(i).confirmarRecepcion(true);
+						
+					}else if( this.primario == true){
+						//mensaje: receptor@medico@seguridad@incendio@ip@puerto
+						mens = mens.substring((mens.indexOf('@')+1), mens.length());
+						String seguridad = mens.substring(0, (mens.indexOf('@')));
+						mens = mens.substring((mens.indexOf('@')+1), mens.length());
+						String incendio = mens.substring(0, (mens.indexOf('@')));
+						mens = mens.substring((mens.indexOf('@')+1), mens.length());
+						String ip = mens.substring(0, (mens.indexOf('@')));
+						mens = mens.substring((mens.indexOf('@')+1), mens.length());
+						String puerto = mens;
+						boolean medico = tipo.equals("true")? true : false;
+						boolean inc = incendio.equals("true")? true : false;
+						boolean seg = seguridad.equals("true")? true : false;
+						int p = Integer.parseInt(puerto);
+						Receptor receptor = new Receptor(inc, medico, seg, p, ip);
+						this.receptores.add(receptor);
+						String nuevoMens = fecha + "\t"+ "Registro Receptor"+ "\t\t" + ip + "\t"+ puerto;
+						this.ventana.nuevoMensaje(nuevoMens);
+					}
+				}
 			}
 		}
 	}
@@ -132,7 +154,7 @@ public class Controlador implements Observer, ActionListener{
 		
 		if(aux.equals("Escuchar")) {
 			this.ventana.setEnableButton(false);
-			this.conexion = new Conectar(this.ventana.getPuerto());
+			this.conexion = new Conectar(this.ventana.getPuerto(), this.ventana.getIpMonitor(), this.ventana.getPuertoMonitor());
 			this.conexion.addObserver(this);
 			this.t = new Thread(this.conexion);
 			this.t.start();
