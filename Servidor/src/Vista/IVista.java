@@ -13,4 +13,6 @@ public interface IVista {
 	void setPuerto(String puerto);
 	void nuevoMensaje(String mensaje);
 	void setEnableButton(boolean b);
+	String getTextTextArea();
+	void setTextTextArea(String msg);
 }

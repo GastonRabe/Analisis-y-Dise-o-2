@@ -25,14 +25,15 @@ public class ConectarPrimario extends Observable implements Runnable{
 	@Override
 	public void run() {
 		try {
-			
-			this.ss = new ServerSocket(puerto);
-			
-			
+			System.out.println("3");
+			this.ss = new ServerSocket(this.puerto);
+			System.out.println("4");
 			while(true) {
+				
 				this.s = this.ss.accept();
-                this.out = new PrintWriter(s.getOutputStream(), true);
-                this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+				this.out = new PrintWriter(this.s.getOutputStream(), true);
+	            this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                
                 String msg = this.in.readLine();
                 this.setChanged();
                 this.notifyObservers(msg);
@@ -51,7 +52,8 @@ public class ConectarPrimario extends Observable implements Runnable{
 		}
 	}
 	
-	public void mandarMensajeReceptor(String msg) {
+	public void mandarMensaje(String msg) {
+		System.out.println("mandar mensaje");
 		this.out.println(msg);
 	}
 

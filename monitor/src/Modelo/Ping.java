@@ -25,26 +25,46 @@ public class Ping extends Observable implements Runnable{
 	@Override
 	public void run() {
 		try {
-			this.s = new Socket(this.ip, this.puerto);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			/*this.s = new Socket(this.ip, this.puerto);
 			this.out = new PrintWriter(s.getOutputStream(), true);
-            this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));*/
             while (true) {
-                //this.out.println("Ping");
+            	this.s = new Socket(this.ip, this.puerto);
+    			this.out = new PrintWriter(s.getOutputStream(), true);
+                this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            	System.out.println("Ping");
+                this.out.println("Ping");
                 String msg = this.in.readLine();
+                System.out.println(msg);
                 this.setChanged();
-                this.notifyObservers(msg+"@"+this.puerto);
+                this.notifyObservers(msg);
+                this.s.close();
+                try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-                this.bool = false;
+               // this.bool = false;
                 // socket.close();
                 // jTextArea1.setText("");
             }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("error"+ e.getMessage());
+			this.setChanged();
+            this.notifyObservers("HacerCambio");
 		}
 	}
 
-	public void mandarPing(String mensaje) {
+	public void mandarPing() {
 		this.out.println("Ping");
 	}
 }

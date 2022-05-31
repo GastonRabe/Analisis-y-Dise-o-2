@@ -19,6 +19,7 @@ public class Conectar extends Observable implements Runnable{
 	private BufferedReader in;
 	private int puerto, puertoMonitor; 
 	private String ipMonitor;
+	private boolean bool = true;
 
 	
 	public Conectar(int puerto, String ipMonitor, int puertoMonitor) {
@@ -31,7 +32,6 @@ public class Conectar extends Observable implements Runnable{
 	@Override
 	public void run() {
 		try {
-			boolean bool = true;
 			this.s = new Socket(this.ipMonitor, this.puertoMonitor);
 			this.out = new PrintWriter(s.getOutputStream(), true);
             this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -41,14 +41,14 @@ public class Conectar extends Observable implements Runnable{
                 this.setChanged();
                 this.notifyObservers(msg);
 
-               bool = false;
+               this.bool = false;
                  this.s.close();
                 // jTextArea1.setText("");
             }
 			ss = new ServerSocket(puerto);
 			
-			
-			while(true) {
+			this.bool = true;
+			while(this.bool) {
 				this.s = this.ss.accept();
                 this.out = new PrintWriter(s.getOutputStream(), true);
                 this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -63,7 +63,9 @@ public class Conectar extends Observable implements Runnable{
 	
 	public void cerrarSocket() {
 		try {
+			this.bool = false;
 			this.s.close();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -219,4 +219,20 @@ public class ventanaServidor extends JFrame implements IVista, KeyListener {
 		// TODO Auto-generated method stub
 		this.textField_puerto.setText(puerto);
 	}
+
+
+
+	@Override
+	public String getTextTextArea() {
+		// TODO Auto-generated method stub
+		return this.textArea.getText();
+	}
+
+
+
+	@Override
+	public void setTextTextArea(String msg) {
+		// TODO Auto-generated method stub
+		this.textArea.setText(msg);
+	}
 }

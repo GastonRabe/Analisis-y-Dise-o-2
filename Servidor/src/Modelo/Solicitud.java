@@ -22,6 +22,7 @@ public class Solicitud {
 	public void confirmarRecepcion(boolean ok) {
 		if(ok) {
 			this.out.println("ConfirmarRecepcion");
+			
 			for(int i=0; i<this.outsReceptores.size(); i++) {
 				if(this.outsReceptores.get(i) != null) {
 					ConectaReceptor cp = new ConectaReceptor(this.outsReceptores.get(i).getIp(), this.outsReceptores.get(i).getPuerto(), "RecepcionConfirmada@"+this.idReference);

@@ -79,6 +79,7 @@ public class Ventana extends JFrame implements IVista{
 		this.contentPane.add(this.scrollPane);
 		
 		this.textArea = new JTextArea();
+		this.textArea.setEditable(false);
 		this.scrollPane.setViewportView(this.textArea);
 		
 		try {

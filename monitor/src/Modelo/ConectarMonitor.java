@@ -30,6 +30,7 @@ public class ConectarMonitor extends Observable implements Runnable{
             while(true) {
                 this.s = this.ss.accept();
                 this.out = new PrintWriter(s.getOutputStream(), true);
+                
                 this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
                 String msg = this.in.readLine();
                 this.setChanged();

@@ -2,6 +2,11 @@ package Controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Formatter;
@@ -53,6 +58,9 @@ public class Controlador implements Observer, ActionListener{
 		if(mensaje.equals("Secundario")) {
 			this.primario = false;
 			this.ventana.setStatus("Secundario");
+		}else if(mensaje.equals("Ping")){
+			System.out.println("llego ping");
+			this.conectarPrimario.mandarMensaje("Eco");
 		}else {
 			int aux = mensaje.indexOf('@');
 			String app =  mensaje.substring(0, aux);
@@ -63,11 +71,18 @@ public class Controlador implements Observer, ActionListener{
 				String puerto = mensaje.substring((mensaje.indexOf('@')+1), mensaje.length());
 				this.ventana.setPuerto(puerto);
 				this.conexion.cerrarSocket();
-				this.t.stop();
+				System.out.println("1");
+				//this.t.stop();
+				System.out.println("2");
 				this.conectarPrimario = new ConectarPrimario(Integer.parseInt(puerto));
 				this.conectarPrimario.addObserver(this);
 				Thread y = new Thread(this.conectarPrimario);
 				y.start();
+				
+			}else if(app.equals("sincronizar")){
+				String mens=mensaje.substring((mensaje.indexOf('@')+1), mensaje.length());
+				mens = mens.replaceAll("&", "\n");
+				this.ventana.setTextTextArea(mens);
 			}else {
 				String mens=mensaje.substring((mensaje.indexOf('@')+1), mensaje.length());
 				String tipo= mens.substring(0, mens.indexOf('@'));
@@ -144,9 +159,24 @@ public class Controlador implements Observer, ActionListener{
 				}
 			}
 		}
+		if(this.primario ) {
+			this.sincronizarServidores(this.ventana.getTextTextArea());
+		}
 	}
 
 
+	public void sincronizarServidores(String mensaje) {
+		try {
+			mensaje = mensaje.replaceAll("\n", "&");
+			Socket s = new Socket(this.ventana.getIpMonitor(), this.ventana.getPuertoMonitor());
+			PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+			out.println("sincronizar@"+mensaje);
+			s.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
