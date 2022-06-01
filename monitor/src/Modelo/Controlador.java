@@ -62,7 +62,7 @@ public class Controlador implements ActionListener, Observer{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else if(msg.equals("HacerCambio")){
+		}else if(msg.equals("HacerCambio") && this.servidores.size() >0){
 			this.servidores.remove(0);
 			if(this.servidores.size() >0) {
 				Thread t = new Thread(this.servidores.get(0));

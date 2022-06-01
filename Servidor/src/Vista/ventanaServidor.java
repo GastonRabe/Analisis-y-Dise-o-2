@@ -22,6 +22,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.border.EtchedBorder;
 
 public class ventanaServidor extends JFrame implements IVista, KeyListener {
 
@@ -84,7 +85,8 @@ public class ventanaServidor extends JFrame implements IVista, KeyListener {
 		this.panel.add(this.panel_2);
 		this.panel_2.setLayout(null);
 		
-		this.btn_escuchar = new JButton("Escuchar");
+		this.btn_escuchar = new JButton("Iniciar");
+		this.btn_escuchar.setActionCommand("Escuchar");
 		this.btn_escuchar.setBounds(50, 15, 100, 21);
 		this.panel_2.add(this.btn_escuchar);
 		
@@ -103,7 +105,7 @@ public class ventanaServidor extends JFrame implements IVista, KeyListener {
 			this.textField_ip.setText(InetAddress.getLocalHost().getHostAddress());
 			
 			this.panel_5 = new JPanel();
-			this.panel_5.setBorder(new TitledBorder(null, "Ip Monitor:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			this.panel_5.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "IP Monitor:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			this.panel.add(this.panel_5);
 			
 			this.textField_ipMonitor = new JTextField();

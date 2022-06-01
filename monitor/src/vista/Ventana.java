@@ -37,6 +37,7 @@ public class Ventana extends JFrame implements IVista{
 	 */
 	public Ventana() {
 		setTitle("Monitor");
+		this.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 200);
 		this.contentPane = new JPanel();
@@ -71,7 +72,7 @@ public class Ventana extends JFrame implements IVista{
 		this.textField_ip.setColumns(10);
 		
 		this.btnNewButton = new JButton("Escuchar");
-		this.btnNewButton.setBounds(330, 12, 85, 21);
+		this.btnNewButton.setBounds(323, 12, 100, 21);
 		this.contentPane.add(this.btnNewButton);
 		
 		this.scrollPane = new JScrollPane();

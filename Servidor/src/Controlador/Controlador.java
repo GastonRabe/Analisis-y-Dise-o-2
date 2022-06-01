@@ -79,10 +79,49 @@ public class Controlador implements Observer, ActionListener{
 				Thread y = new Thread(this.conectarPrimario);
 				y.start();
 				
-			}else if(app.equals("sincronizar")){
-				String mens=mensaje.substring((mensaje.indexOf('@')+1), mensaje.length());
-				mens = mens.replaceAll("&", "\n");
-				this.ventana.setTextTextArea(mens);
+			}else if(app.equals("sincronizar")){ //ACTUALIZA RECEPTORES
+				String mens=mensaje.substring((mensaje.indexOf('@')+1), mensaje.length()); //receptor@....
+				if(mens.contains("@")) {
+					this.receptores.clear();
+					System.out.println(mens);
+					 mens=mens.substring((mens.indexOf('@')+1), mens.length());
+					while(mens.contains("&")) {
+						String med = mens.substring(0, (mens.indexOf('@')));
+						mens = mens.substring((mens.indexOf('@')+1), mens.length());
+						String seguridad = mens.substring(0, (mens.indexOf('@')));
+						mens = mens.substring((mens.indexOf('@')+1), mens.length());
+						String incendio = mens.substring(0, (mens.indexOf('@')));
+						mens = mens.substring((mens.indexOf('@')+1), mens.length());
+						String ip = mens.substring(0, (mens.indexOf('@')));
+						mens = mens.substring((mens.indexOf('@')+1), mens.length());
+						String puerto = mens.substring(0, mens.indexOf('&'));
+						mens= mens.substring((mens.indexOf('&')+1), mens.length());
+						boolean medico = med.equals("true")? true : false;
+						boolean inc = incendio.equals("true")? true : false;
+						boolean seg = seguridad.equals("true")? true : false;
+						int p = Integer.parseInt(puerto);
+						Receptor receptor = new Receptor(inc, medico, seg, p, ip);
+						this.receptores.add(receptor);
+					}
+					/*String med = mens.substring(0, (mens.indexOf('@')));
+					mens = mens.substring((mens.indexOf('@')+1), mens.length());
+					String seguridad = mens.substring(0, (mens.indexOf('@')));
+					mens = mens.substring((mens.indexOf('@')+1), mens.length());
+					String incendio = mens.substring(0, (mens.indexOf('@')));
+					mens = mens.substring((mens.indexOf('@')+1), mens.length());
+					String ip = mens.substring(0, (mens.indexOf('@')));
+					mens = mens.substring((mens.indexOf('@')+1), mens.length());
+					String puerto = mens;
+					boolean medico = med.equals("true")? true : false;
+					boolean inc = incendio.equals("true")? true : false;
+					boolean seg = seguridad.equals("true")? true : false;
+					int p = Integer.parseInt(puerto);
+					Receptor receptor = new Receptor(inc, medico, seg, p, ip);
+					this.receptores.add(receptor);*/
+				}else { //ACTUALIZA AREA DE TEXTO
+					mens = mens.replaceAll("&", "\n");
+					this.ventana.setTextTextArea(mens);
+				}
 			}else {
 				String mens=mensaje.substring((mensaje.indexOf('@')+1), mensaje.length());
 				String tipo= mens.substring(0, mens.indexOf('@'));
@@ -155,17 +194,20 @@ public class Controlador implements Observer, ActionListener{
 						this.receptores.add(receptor);
 						String nuevoMens = fecha + "\t"+ "Registro Receptor"+ "\t\t" + ip + "\t"+ puerto;
 						this.ventana.nuevoMensaje(nuevoMens);
+						
+						
 					}
 				}
 			}
 		}
-		if(this.primario ) {
-			this.sincronizarServidores(this.ventana.getTextTextArea());
+		if(this.primario) {
+			this.sincronizar(this.ventana.getTextTextArea());
+			this.sincronizarReceptores();
 		}
 	}
 
 
-	public void sincronizarServidores(String mensaje) {
+	public void sincronizar(String mensaje) {
 		try {
 			mensaje = mensaje.replaceAll("\n", "&");
 			Socket s = new Socket(this.ventana.getIpMonitor(), this.ventana.getPuertoMonitor());
@@ -176,6 +218,17 @@ public class Controlador implements Observer, ActionListener{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void sincronizarReceptores() {
+		//mensaje: receptor@medico@seguridad@incendio@ip@puerto
+		String sinc = "receptor@";
+		for(int i=0; i<this.receptores.size(); i++) {
+			sinc = sinc + this.receptores.get(i).isAsistenciaMedica()+"@"+this.receptores.get(i).isSeguridad()+"@"+this.receptores.get(i).isFocoIncendio()+"@"+
+					this.receptores.get(i).getIp()+"@"+this.receptores.get(i).getPuerto();
+			sinc = sinc + "\n";
+		}
+		this.sincronizar(sinc);
 	}
 
 	@Override

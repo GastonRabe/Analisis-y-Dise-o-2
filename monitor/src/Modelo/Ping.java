@@ -26,7 +26,7 @@ public class Ping extends Observable implements Runnable{
 	public void run() {
 		try {
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
