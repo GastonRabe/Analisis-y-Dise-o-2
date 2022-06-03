@@ -15,7 +15,6 @@ public class Ping extends Observable implements Runnable{
 	private Socket s;
 	private PrintWriter out;
 	private BufferedReader in;
-	private boolean bool = true;
 	
 	public Ping(String ip, int puerto2) {
 		this.ip = ip;
@@ -31,17 +30,12 @@ public class Ping extends Observable implements Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			/*this.s = new Socket(this.ip, this.puerto);
-			this.out = new PrintWriter(s.getOutputStream(), true);
-            this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));*/
             while (true) {
             	this.s = new Socket(this.ip, this.puerto);
     			this.out = new PrintWriter(s.getOutputStream(), true);
                 this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            	System.out.println("Ping");
                 this.out.println("Ping");
                 String msg = this.in.readLine();
-                System.out.println(msg);
                 this.setChanged();
                 this.notifyObservers(msg);
                 this.s.close();
@@ -51,14 +45,8 @@ public class Ping extends Observable implements Runnable{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
-               // this.bool = false;
-                // socket.close();
-                // jTextArea1.setText("");
             }
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("error"+ e.getMessage());
 			this.setChanged();
             this.notifyObservers("HacerCambio");
 		}

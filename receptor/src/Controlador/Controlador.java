@@ -71,11 +71,12 @@ public class Controlador implements ActionListener, Observer{
 				this.ventana.setBtnRecepcion(false);
 				this.ventana.setBtnEscuchar(false);
 			} catch (NumberFormatException | IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				
 			}
 		}
 	}
+	
+	
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -94,6 +95,7 @@ public class Controlador implements ActionListener, Observer{
 			}
 		}
 	}
+
 
 	
 }

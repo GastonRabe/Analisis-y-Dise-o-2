@@ -25,9 +25,7 @@ public class ConectarPrimario extends Observable implements Runnable{
 	@Override
 	public void run() {
 		try {
-			System.out.println("3");
 			this.ss = new ServerSocket(this.puerto);
-			System.out.println("4");
 			while(true) {
 				
 				this.s = this.ss.accept();
@@ -53,7 +51,6 @@ public class ConectarPrimario extends Observable implements Runnable{
 	}
 	
 	public void mandarMensaje(String msg) {
-		System.out.println("mandar mensaje");
 		this.out.println(msg);
 	}
 

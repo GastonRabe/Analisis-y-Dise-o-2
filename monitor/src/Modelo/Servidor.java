@@ -14,7 +14,6 @@ public class Servidor extends Observable implements Runnable{
 	private String ip, puerto;
 	private Socket s;
 	private PrintWriter out;
-	private BufferedReader in;
 
 	public Servidor(String ip, String puerto) {
 		super();
@@ -44,7 +43,6 @@ public class Servidor extends Observable implements Runnable{
 		try {
 			this.s = new Socket(ip, Integer.parseInt(this.puerto));
 			this.out = new PrintWriter(s.getOutputStream(), true);
-            this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			this.out.println("Primario@"+Controlador.puertoReferencia);
 			this.puerto = Controlador.puertoReferencia;
 			this.s.close();
@@ -52,7 +50,6 @@ public class Servidor extends Observable implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("error"+ e.getMessage());
 			this.setChanged();
             this.notifyObservers("HacerCambio");
 			e.printStackTrace();

@@ -67,6 +67,12 @@ public class Controlador implements ActionListener, Observer{
 		if(mensaje.contains("rechazado")) {
 			this.panel.get(this.panel.size()-1).showMensaje("Rechazado");
 			this.panel.remove(this.panel.size()-1);
+		}else if(mensaje.contains("reintento")){
+			this.panel.get(this.panel.size()-1).showMensaje("Reintentando");
+		}else if(mensaje.contains("noEnviado")){
+			this.panel.get(this.panel.size()-1).showMensaje("No Enviado");
+		}else if(mensaje.contains("reenviado")){
+			this.panel.get(this.panel.size()-1).showMensaje("Reenviado");
 		}else {
 			int aux = mensaje.indexOf('@');
 			String puerto = mensaje.substring(aux+1, mensaje.length());

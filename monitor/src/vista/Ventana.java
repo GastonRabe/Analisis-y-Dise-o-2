@@ -14,6 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class Ventana extends JFrame implements IVista{
 
@@ -37,9 +40,10 @@ public class Ventana extends JFrame implements IVista{
 	 */
 	public Ventana() {
 		setTitle("Monitor");
+		this.setAlwaysOnTop(true);
 		this.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 200);
+		setBounds(100, 100, 500, 200);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(this.contentPane);
@@ -47,7 +51,7 @@ public class Ventana extends JFrame implements IVista{
 		
 		this.panel_2 = new JPanel();
 		this.panel_2.setBorder(new TitledBorder(null, "Puerto:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		this.panel_2.setBounds(175, 3, 129, 40);
+		this.panel_2.setBounds(190, 3, 129, 40);
 		this.contentPane.add(this.panel_2);
 		this.panel_2.setLayout(new BorderLayout(0, 0));
 		
@@ -56,27 +60,29 @@ public class Ventana extends JFrame implements IVista{
 		this.panel_1.setLayout(null);
 		
 		this.textField_puerto = new JTextField();
+		this.textField_puerto.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textField_puerto.setBounds(0, 0, 117, 19);
 		this.panel_1.add(this.textField_puerto);
 		this.textField_puerto.setColumns(10);
 		
 		this.panel = new JPanel();
-		this.panel.setBorder(new TitledBorder(null, "Ip:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		this.panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "IP:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		this.panel.setBounds(10, 3, 129, 40);
 		this.contentPane.add(this.panel);
 		this.panel.setLayout(new BorderLayout(0, 0));
 		
 		this.textField_ip = new JTextField();
+		this.textField_ip.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textField_ip.setEditable(false);
 		this.panel.add(this.textField_ip);
 		this.textField_ip.setColumns(10);
 		
 		this.btnNewButton = new JButton("Escuchar");
-		this.btnNewButton.setBounds(323, 12, 100, 21);
+		this.btnNewButton.setBounds(375, 12, 100, 21);
 		this.contentPane.add(this.btnNewButton);
 		
 		this.scrollPane = new JScrollPane();
-		this.scrollPane.setBounds(10, 43, 416, 110);
+		this.scrollPane.setBounds(10, 43, 470, 110);
 		this.contentPane.add(this.scrollPane);
 		
 		this.textArea = new JTextArea();

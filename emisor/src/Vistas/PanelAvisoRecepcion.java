@@ -138,7 +138,7 @@ public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListene
 		this.txtNoRecibida.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		this.txtNoRecibida.setText("No Recibida");
 		this.txtNoRecibida.setEditable(false);
-		this.txtNoRecibida.setBounds(151, 31, 143, 59);
+		this.txtNoRecibida.setBounds(145, 31, 160, 59);
 		this.panel_1.add(this.txtNoRecibida);
 		this.txtNoRecibida.setColumns(10);
 		
@@ -178,7 +178,8 @@ public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListene
 	@Override
 	public void showMensaje(String mensaje) {
 		this.txtNoRecibida.setText(mensaje);
-		this.btnNewButton.setEnabled(true);
+		if(!mensaje.equals("Reintentando") && !mensaje.equals("Reenviado"))
+			this.btnNewButton.setEnabled(true);
 	}
 
 	@Override

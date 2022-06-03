@@ -43,7 +43,6 @@ public class Conectar extends Observable implements Runnable{
 
                this.bool = false;
                  this.s.close();
-                // jTextArea1.setText("");
             }
 			ss = new ServerSocket(puerto);
 			

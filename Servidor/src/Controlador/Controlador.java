@@ -59,21 +59,16 @@ public class Controlador implements Observer, ActionListener{
 			this.primario = false;
 			this.ventana.setStatus("Secundario");
 		}else if(mensaje.equals("Ping")){
-			System.out.println("llego ping");
 			this.conectarPrimario.mandarMensaje("Eco");
 		}else {
 			int aux = mensaje.indexOf('@');
 			String app =  mensaje.substring(0, aux);
 			if(app.equals("Primario")) {
 				this.ventana.setStatus("Primario");
-				
 				this.primario = true;
 				String puerto = mensaje.substring((mensaje.indexOf('@')+1), mensaje.length());
 				this.ventana.setPuerto(puerto);
 				this.conexion.cerrarSocket();
-				System.out.println("1");
-				//this.t.stop();
-				System.out.println("2");
 				this.conectarPrimario = new ConectarPrimario(Integer.parseInt(puerto));
 				this.conectarPrimario.addObserver(this);
 				Thread y = new Thread(this.conectarPrimario);
@@ -83,7 +78,6 @@ public class Controlador implements Observer, ActionListener{
 				String mens=mensaje.substring((mensaje.indexOf('@')+1), mensaje.length()); //receptor@....
 				if(mens.contains("@")) {
 					this.receptores.clear();
-					System.out.println(mens);
 					 mens=mens.substring((mens.indexOf('@')+1), mens.length());
 					while(mens.contains("&")) {
 						String med = mens.substring(0, (mens.indexOf('@')));
@@ -103,21 +97,6 @@ public class Controlador implements Observer, ActionListener{
 						Receptor receptor = new Receptor(inc, medico, seg, p, ip);
 						this.receptores.add(receptor);
 					}
-					/*String med = mens.substring(0, (mens.indexOf('@')));
-					mens = mens.substring((mens.indexOf('@')+1), mens.length());
-					String seguridad = mens.substring(0, (mens.indexOf('@')));
-					mens = mens.substring((mens.indexOf('@')+1), mens.length());
-					String incendio = mens.substring(0, (mens.indexOf('@')));
-					mens = mens.substring((mens.indexOf('@')+1), mens.length());
-					String ip = mens.substring(0, (mens.indexOf('@')));
-					mens = mens.substring((mens.indexOf('@')+1), mens.length());
-					String puerto = mens;
-					boolean medico = med.equals("true")? true : false;
-					boolean inc = incendio.equals("true")? true : false;
-					boolean seg = seguridad.equals("true")? true : false;
-					int p = Integer.parseInt(puerto);
-					Receptor receptor = new Receptor(inc, medico, seg, p, ip);
-					this.receptores.add(receptor);*/
 				}else { //ACTUALIZA AREA DE TEXTO
 					mens = mens.replaceAll("&", "\n");
 					this.ventana.setTextTextArea(mens);
@@ -131,7 +110,6 @@ public class Controlador implements Observer, ActionListener{
 					mens = mens.substring((mens.indexOf('@')+1), mens.length());
 					String lugar = mens.substring(0, mens.indexOf('@'));
 					String hora = mens.substring((mens.indexOf('@')+1), mens.length());
-					
 					int i;
 					boolean aceptaReceptor;
 					boolean hayReceptores = false;
@@ -141,7 +119,6 @@ public class Controlador implements Observer, ActionListener{
 					this.ventana.nuevoMensaje(hora+ "\t"+ "Enviando solicitud a:\t\t");
 					for(i=0; i<this.receptores.size(); i++) {
 						aceptaReceptor = false;
-						
 						if(tipo.equals("Foco Incendio") && this.receptores.get(i).isFocoIncendio()) {
 							aceptaReceptor= true;
 						}else if(tipo.equals("Seguridad") && this.receptores.get(i).isSeguridad()) {
@@ -166,7 +143,6 @@ public class Controlador implements Observer, ActionListener{
 				}else {
 					if(tipo.equals("ConfirmarRecepcion") && this.primario == true) {
 						//CONFIRMACION DE RECEPCION
-						
 						String id = mens.substring((mens.indexOf('@')+1), mens.length());
 						int idSol = Integer.parseInt(id);
 						int i=0;
@@ -194,8 +170,6 @@ public class Controlador implements Observer, ActionListener{
 						this.receptores.add(receptor);
 						String nuevoMens = fecha + "\t"+ "Registro Receptor"+ "\t\t" + ip + "\t"+ puerto;
 						this.ventana.nuevoMensaje(nuevoMens);
-						
-						
 					}
 				}
 			}
@@ -212,7 +186,6 @@ public class Controlador implements Observer, ActionListener{
 			mensaje = mensaje.replaceAll("\n", "&");
 			Socket s = new Socket(this.ventana.getIpMonitor(), this.ventana.getPuertoMonitor());
 			PrintWriter out = new PrintWriter(s.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			out.println("sincronizar@"+mensaje);
 			s.close();
 		} catch (IOException e) {
@@ -234,7 +207,6 @@ public class Controlador implements Observer, ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String aux = e.getActionCommand();
-		
 		if(aux.equals("Escuchar")) {
 			this.ventana.setEnableButton(false);
 			this.conexion = new Conectar(this.ventana.getPuerto(), this.ventana.getIpMonitor(), this.ventana.getPuertoMonitor());

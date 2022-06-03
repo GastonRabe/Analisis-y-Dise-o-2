@@ -1,6 +1,6 @@
 package Modelo;
 
-import javax.swing.Timer;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -23,7 +23,6 @@ public class Controlador implements ActionListener, Observer{
 	static String puertoReferencia = "1000";
 	private Ping ping;
 	private Thread tPing;
-	private Timer timer;
 	
 	
 	
@@ -53,7 +52,6 @@ public class Controlador implements ActionListener, Observer{
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		String msg = (String) arg;
-		System.out.println("mensaje: "+msg);
 		//nuevo
 		if(msg.equals("Eco")) {
 			try {
@@ -63,18 +61,22 @@ public class Controlador implements ActionListener, Observer{
 				e.printStackTrace();
 			}
 		}else if(msg.equals("HacerCambio") && this.servidores.size() >0){
+			this.ventana.nuevoMensaje("FALLO EN EL SERVIDOR PRIMARIO \tIP: "+ this.servidores.get(0).getIp() + "\tPUERTO: "+ this.servidores.get(0).getPuerto());
 			this.servidores.remove(0);
 			if(this.servidores.size() >0) {
+				this.ventana.nuevoMensaje("REEMPLAZADO POR SERVIDOR \tIP: "+ this.servidores.get(0).getIp() + "\tPUERTO: "+ this.servidores.get(0).getPuerto());
 				Thread t = new Thread(this.servidores.get(0));
 				t.start();
 				this.ping = new Ping(this.servidores.get(0).getIp(), Integer.parseInt(this.puertoReferencia));
 				this.ping.addObserver(this);
 				this.tPing = new Thread(this.ping);
 				this.tPing.start();
+			}else {
+				this.ventana.nuevoMensaje("NO HAY SERVIDORES PARA REEMPLAZARLO");
 			}
 		}else {
 			String tipo = msg.substring(0, msg.indexOf('@'));
-			if(tipo.equals("nuevo")) {
+			if(tipo.equals("nuevo")) { //NUEVO SERVIDOR
 				int i = msg.indexOf('@');
 				msg = msg.substring(msg.indexOf('@')+1);
 				String ip = msg.substring(0, msg.indexOf('@'));
@@ -83,13 +85,15 @@ public class Controlador implements ActionListener, Observer{
 				s.addObserver(this);
 				this.servidores.add(s);
 				if(this.servidores.size() == 1) {
-					s.setPuerto(this.puertoReferencia);
+					this.ventana.nuevoMensaje("NUEVO SERVIDOR ESTADO: PRIMARIO\tIP: "+ ip +  "\tPUERTO: "+ Controlador.puertoReferencia );
+					s.setPuerto(Controlador.puertoReferencia);
 					this.conexion.mandarMensaje("Primario@"+this.puertoReferencia);
 					this.ping = new Ping(ip, Integer.parseInt(this.puertoReferencia));
 					this.ping.addObserver(this);
 					this.tPing = new Thread(this.ping);
 					this.tPing.start();
 				}else {
+					this.ventana.nuevoMensaje("NUEVO SERVIDOR ESTADO: SECUNDARIO\tIP: "+ ip +  "\tPUERTO: "+ puerto );
 					this.conexion.mandarMensaje("Secundario");
 				}
 			}else if(tipo.equals("sincronizar")){
@@ -101,7 +105,7 @@ public class Controlador implements ActionListener, Observer{
 						out.println(msg);
 						s.close();
 					} catch (IOException e) {
-						e.printStackTrace();
+						this.servidores.remove(i);
 					}
 				}
 			}
