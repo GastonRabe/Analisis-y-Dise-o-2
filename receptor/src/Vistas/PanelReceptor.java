@@ -41,7 +41,6 @@ import javax.swing.border.EtchedBorder;
 public class PanelReceptor extends JFrame implements IVista, KeyListener {
 
 	private JPanel contentPane;
-	private JPanel panel_10;
 	private JPanel panel_11;
 	private JPanel panel_2;
 	private JRadioButton rdbtnAsistenciaMedica;
@@ -57,6 +56,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 	private JTextField textField_lugar;
 	private JPanel panel_7;
 	private JPanel panel_8;
+	private JPanel panel_1;
 	private JButton btn_ConfirmarRecepcion;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_4;
@@ -79,31 +79,32 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		setTitle("Receptor");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(x, y, 500, 380);
+		setBounds(x, y, 500, 280);
 		setResizable(false);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(this.contentPane);
 		this.contentPane.setLayout(null);
 		
-		this.panel_10 = new JPanel();
-		this.panel_10.setBounds(5, 7, 243, 93);
-		this.contentPane.add(this.panel_10);
-		this.panel_10.setLayout(null);
+		panel_1 = new JPanel();
+		panel_1.setBounds(5, 300, 243, 93);
+		this.contentPane.add(panel_1);
+		panel_1.setLayout(null);
 		
 		this.lblNewLabel_1 = new JLabel("IP:");
 		this.lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		this.lblNewLabel_1.setBounds(10, 10, 57, 26);
-		this.panel_10.add(this.lblNewLabel_1);
+		panel_1.add(this.lblNewLabel_1);
+		
 		
 		this.lblNewLabel_4 = new JLabel("Puerto:");
 		this.lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		this.lblNewLabel_4.setBounds(10, 46, 103, 28);
-		this.panel_10.add(this.lblNewLabel_4);
+		panel_1.add(this.lblNewLabel_4);
 		
 		this.textFieldIP = new JTextField();
 		this.textFieldIP.setBounds(77, 17, 163, 20);
-		this.panel_10.add(this.textFieldIP);
+		panel_1.add(this.textFieldIP);
 		this.textFieldIP.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textFieldIP.setEditable(false);
 		this.textFieldIP.setColumns(10);
@@ -116,7 +117,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		
 		this.textFieldPuerto = new JTextField();
 		this.textFieldPuerto.setBounds(77, 54, 163, 20);
-		this.panel_10.add(this.textFieldPuerto);
+		panel_1.add(this.textFieldPuerto);
 		this.textFieldPuerto.setEditable(false);
 		this.textFieldPuerto.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textFieldPuerto.addKeyListener(this);
@@ -124,7 +125,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.textFieldPuerto.setText(puerto);
 		
 		this.panel_11 = new JPanel();
-		this.panel_11.setBounds(248, 7, 243, 93);
+		this.panel_11.setBounds(248, 300, 243, 93);
 		this.contentPane.add(this.panel_11);
 		this.panel_11.setLayout(null);
 		
@@ -153,7 +154,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.rdbtnSeguridad.setSelected(seguridad);
 		
 		this.panel_5 = new JPanel();
-		this.panel_5.setBounds(5, 100, 243, 93);
+		this.panel_5.setBounds(5, 10, 243, 93);
 		this.contentPane.add(this.panel_5);
 		this.panel_5.setLayout(null);
 		
@@ -173,7 +174,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		this.panel = new JPanel();
-		this.panel.setBounds(248, 100, 243, 93);
+		this.panel.setBounds(248, 10, 243, 93);
 		this.contentPane.add(this.panel);
 		this.panel.setLayout(null);
 		
@@ -202,7 +203,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.textField_lugar.setBackground(Color.WHITE);
 		
 		this.panel_7 = new JPanel();
-		this.panel_7.setBounds(5, 249, 486, 93);
+		this.panel_7.setBounds(5, 150, 486, 93);
 		this.panel_7.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Historial de Solicitudes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		this.contentPane.add(this.panel_7);
 		this.panel_7.setLayout(new BorderLayout(0, 0));
@@ -215,7 +216,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		this.scrollPane.setViewportView(this.textArea);
 		
 		this.panel_8 = new JPanel();
-		this.panel_8.setBounds(116, 203, 243, 63);
+		this.panel_8.setBounds(116, 100, 243, 63);
 		this.contentPane.add(this.panel_8);
 		this.panel_8.setLayout(null);
 		
@@ -232,6 +233,7 @@ public class PanelReceptor extends JFrame implements IVista, KeyListener {
 		
 		this.setAlwaysOnTop(true);
 		this.textArea.append("Tipo de Solicitud:"+"\t"+"Lugar:"+"\t\t"+"Fecha y Hora:"+"\n\n");
+		this.panel_1.setVisible(false);
 		this.setVisible(true);
 	}
 

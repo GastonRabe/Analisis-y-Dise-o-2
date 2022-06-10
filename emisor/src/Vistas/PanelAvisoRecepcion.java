@@ -59,15 +59,16 @@ public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListene
 		this.puerto = puerto;
 		setBackground(SystemColor.inactiveCaptionText);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 210);
 		setResizable(false);
 		this.contentPane = new JPanel();
 		this.contentPane.setBackground(SystemColor.inactiveCaptionBorder);
 		this.contentPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		setContentPane(this.contentPane);
-		this.contentPane.setLayout(new GridLayout(2, 1, 0, 0));
+		this.contentPane.setLayout(null);
 		
 		this.panel = new JPanel();
+		this.panel.setBounds(2, 2, 442, 109);
 		this.panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		this.contentPane.add(this.panel);
 		this.panel.setLayout(new GridLayout(2, 2, 0, 0));
@@ -110,18 +111,19 @@ public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListene
 		
 		this.lblNewLabel_4 = new JLabel("Hora:");
 		this.lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.lblNewLabel_4.setBounds(143, 39, 49, 14);
+		this.lblNewLabel_4.setBounds(143, 35, 49, 14);
 		this.panel_2.add(this.lblNewLabel_4);
 		
 		this.textField_hora = new JTextField();
 		this.textField_hora.setHorizontalAlignment(SwingConstants.CENTER);
 		this.textField_hora.setEditable(false);
 		this.textField_hora.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.textField_hora.setBounds(187, 36, 86, 20);
+		this.textField_hora.setBounds(187, 31, 86, 20);
 		this.panel_2.add(this.textField_hora);
 		this.textField_hora.setColumns(10);
 		
 		this.panel_1 = new JPanel();
+		this.panel_1.setBounds(2, 111, 442, 109);
 		this.panel_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		this.contentPane.add(this.panel_1);
 		this.panel_1.setLayout(null);
@@ -130,7 +132,7 @@ public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListene
 		this.btnNewButton.setBackground(SystemColor.inactiveCaption);
 		this.btnNewButton.addActionListener(this);
 		this.btnNewButton.setEnabled(false);
-		this.btnNewButton.setBounds(180, 110, 85, 21);
+		this.btnNewButton.setBounds(173, 38, 85, 21);
 		this.panel_1.add(this.btnNewButton);
 		
 		this.txtNoRecibida = new JTextField();
@@ -138,7 +140,7 @@ public class PanelAvisoRecepcion extends JFrame implements IVista, ActionListene
 		this.txtNoRecibida.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		this.txtNoRecibida.setText("No Recibida");
 		this.txtNoRecibida.setEditable(false);
-		this.txtNoRecibida.setBounds(145, 31, 160, 59);
+		this.txtNoRecibida.setBounds(144, 5, 160, 30);
 		this.panel_1.add(this.txtNoRecibida);
 		this.txtNoRecibida.setColumns(10);
 		
