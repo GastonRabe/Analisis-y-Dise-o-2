@@ -2,7 +2,7 @@ Manual de instalación, configuración y operación
 
 1- Verificar tener instalado Java en su computadora, con una versión de Jdk 16. 
 
-2- Una vez descargados los .jar, abrir primero el servidor, completar el puerto por el cual se va a escuchar y apretar el botón “escuchar”. Todo evento que pase por el servidor será mostrado en su pantalla brindando toda la información necesaria para un seguimiento de acciones.
+2- Una vez descargados los .jar, abrir primero el monitor, configurar el puerto y presionar el botón escuchar. Luego se podrán ejecutar servidores en cualquier momento, completar el puerto por el cual se va a escuchar y apretar el botón “iniciar”. Todo evento que pase por el servidor será mostrado en su pantalla brindando toda la información necesaria para un seguimiento de acciones, y se seteará el estado “Primario” o “Secundario” según corresponda.
 
 3- Abrir receptores/emisores a gusto.
 Al ejecutar un receptor, se debe configurar el puerto en el que se va a estar escuchando, además de la ip y puerto del servidor al cual se desea conectar y no olvidar configurar qué tipo de solicitudes se quieren escuchar, seleccionando los botones correspondientes a cada tipo. Paso siguiente apretar el botón “conectar”, si previamente no se seleccionó ningún botón para escuchar algún tipo de solicitud, no se recibirá ninguna.
